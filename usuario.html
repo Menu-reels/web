@@ -327,6 +327,51 @@
         document.querySelector(".play-button").style.display = "none";
     }
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoriasContainer = document.querySelector(".categorias-container");
+    const leftArrow = document.getElementById("left-arrow");
+    const rightArrow = document.getElementById("right-arrow");
+    const scrollDistance = 150; // Cambia este valor según tu preferencia
+
+    // Desplazamiento hacia la izquierda al hacer clic en la flecha izquierda
+    leftArrow.addEventListener("click", function () {
+      categoriasContainer.scrollLeft -= scrollDistance;
+    });
+
+    // Desplazamiento hacia la derecha al hacer clic en la flecha derecha
+    rightArrow.addEventListener("click", function () {
+      categoriasContainer.scrollLeft += scrollDistance;
+    });
+
+    // Detectar desplazamiento táctil (swipe) en dispositivos móviles
+    let touchStartX = null;
+
+    categoriasContainer.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    categoriasContainer.addEventListener("touchmove", function (e) {
+      if (touchStartX === null) return;
+      const touchEndX = e.touches[0].clientX;
+      const deltaX = touchStartX - touchEndX;
+
+      if (deltaX > 0) {
+        // Desplazamiento hacia la izquierda
+        categoriasContainer.scrollLeft += deltaX;
+      } else {
+        // Desplazamiento hacia la derecha
+        categoriasContainer.scrollLeft += deltaX;
+      }
+
+      touchStartX = touchEndX;
+    });
+
+    categoriasContainer.addEventListener("touchend", function () {
+      touchStartX = null;
+    });
+  });
+</script>
 
 </body>
 </html>
