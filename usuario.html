@@ -97,6 +97,12 @@
             cursor: pointer;
         }
 
+ .description-left span.VerMenos {
+            font-size: 12px;
+            color: #0077cc; /* Color del enlace Ver Más */
+            cursor: pointer;
+        }
+
         .description-right {
             display: flex;
             flex-direction: column;
@@ -191,6 +197,13 @@ width: 30px;
     color: #0077cc;
     cursor: pointer;
     }
+
+/* Estilos para cuando la descripción está expandida */
+.expandido {
+    overflow: visible !important; /* Hacer visible el contenido completo */
+    max-height: none !important; /* Eliminar la restricción de altura */
+}
+
 
     </style>
 </head>
