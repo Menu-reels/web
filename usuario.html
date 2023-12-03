@@ -233,7 +233,7 @@ width: 30px;
         </div>
         <h2>Aji de Gallina</h2>
         <p class="precio">16€</p>
-      <p class="descripcion"><span class="texto-extra" style="display:none"> Ver Menos</span></p>
+      <p class="descripcion">EJEMPLO DE COMIDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
 <span class="VerMas">Ver Más</span>
 <span class="VerMenos" style="display:none">Ver Menos</span>
 
@@ -360,42 +360,45 @@ window.addEventListener("wheel", function (e) {
 
 
  document.addEventListener("DOMContentLoaded", function () {
-            const descripcion = document.querySelector(".descripcion");
-            const textoExtra = document.querySelector(".VerMenos");
-            const verMas = document.querySelector(".VerMas");
-            const verMenos = document.querySelector(".VerMenos");
+    const descripcion = document.querySelector(".descripcion");
+    const textoExtra = document.querySelector(".puntos");
+    const verMas = document.querySelector(".VerMas");
+    const verMenos = document.querySelector(".VerMenos");
 
-            // Función para mostrar el texto completo
-            function mostrarTextoCompleto() {
-                descripcion.classList.add("expandido");
-                textoExtra.style.display = "none";
-                verMenos.style.display = "inline";
-                verMas.style.display = "none";
-            }
+    // Función para mostrar el texto completo
+    function mostrarTextoCompleto() {
+        descripcion.classList.add("expandido");
+        textoExtra.style.display = "none";
+        verMenos.style.display = "inline";
+        verMas.style.display = "none";
+    }
 
-            // Función para mostrar el texto recortado
-            function mostrarTextoRecortado() {
-                descripcion.classList.remove("expandido");
-                textoExtra.style.display = "inline";
-                verMenos.style.display = "none";
-                verMas.style.display = "inline";
-            }
+    // Función para mostrar el texto recortado
+    function mostrarTextoRecortado() {
+        descripcion.classList.remove("expandido");
+        textoExtra.style.display = "inline";
+        verMenos.style.display = "none";
+        verMas.style.display = "inline";
+    }
 
-            // Agrega el evento click para "Ver Más"
-            verMas.addEventListener("click", mostrarTextoCompleto);
+    // Agrega el evento click para "Ver Más"
+    verMas.addEventListener("click", mostrarTextoCompleto);
 
-            // Agrega el evento click para "Ver Menos"
-            verMenos.addEventListener("click", mostrarTextoRecortado);
+    // Agrega el evento click para "Ver Menos"
+    verMenos.addEventListener("click", mostrarTextoRecortado);
 
-            // Verifica el estado inicial
-            if (descripcion.textContent.length > 100) {
-                const textoRecortado = descripcion.textContent.slice(0, 100) + "...";
-                descripcion.textContent = textoRecortado;
-                mostrarTextoRecortado();
-            }
-        });
+    // Verifica el estado inicial
+    const textoCompleto = descripcion.textContent;
+    const longitudMaxima = 144;
 
-    
+    if (textoCompleto.length > longitudMaxima) {
+        const textoRecortado = textoCompleto.slice(0, longitudMaxima) + "...";
+        const textoRestante = textoCompleto.slice(longitudMaxima);
+        descripcion.innerHTML = textoRecortado + `<span class="puntos">${textoRestante}</span>`;
+        mostrarTextoRecortado();
+    }
+});
+
 
 
     // Función para reproducir el video en dispositivos móviles
