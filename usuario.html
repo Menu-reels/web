@@ -331,9 +331,11 @@ function mostrarDescripcion() {
     descripcionCompleta = !descripcionCompleta;
 }
 
+// Inicialmente, mostrar la descripción truncada
+mostrarDescripcion();
+
 // Manejar el evento clic en "Ver Más"/"Ver Menos"
 verMas.addEventListener("click", mostrarDescripcion);
-
 
 // Detectar el desplazamiento de rueda (scroll) para cambiar el video
 window.addEventListener("wheel", function (e) {
