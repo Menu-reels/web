@@ -255,7 +255,7 @@ let videoIndex = 0;
 // Elementos HTML para actualizar
 const nombreDelPlato = document.querySelector(".description-left h2");
 const precioPlato = document.querySelector(".description-left p.precio");
-const descripcion = document.querySelector(".description-left p.descripcion");
+const descripcion = document.querySelector(".description-left p.descripcion-truncada");
 const verMas = document.querySelector(".description-left span.VerMas");
 
 // Inicializar el video
@@ -364,14 +364,6 @@ window.addEventListener("wheel", function (e) {
         document.querySelector(".play-button").style.display = "none";
     }
 
-
-
-
-    // Función para reproducir el video en dispositivos móviles
-    function playVideo() {
-        video.play();
-        document.querySelector(".play-button").style.display = "none";
-    }
 
     document.addEventListener("DOMContentLoaded", function () {
       const categoriasContainer = document.querySelector(".categorias-container");
