@@ -177,7 +177,6 @@
         <i class="fas fa-plus"></i>
     </div>
 </div>
-<!-- Script para reproducir el video en dispositivos móviles -->
 <script>
     const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
     let videoIndex = 0;
@@ -191,61 +190,70 @@
     video.load();
     video.play();
 
+    // Variable para controlar la dirección del desplazamiento
+    let scrollDirection = 0;
+
+    // Descripciones de los platos
+    const platos = [
+        {
+            nombre: "Restaurante",
+            descripcion: "Nombre del Plato"
+        },
+        {
+            nombre: "Spaguetti",
+            descripcion: "Precio 12€"
+        },
+        {
+            nombre: "Macarrones con Chorizo",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Sopa de Sobre",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Bandera",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Colada Morada",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Ensalada César",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Calamares",
+            descripcion: "Precio 14€"
+        },
+        {
+            nombre: "Gazpacho",
+            descripcion: "Precio 14€"
+        },
+        // Agrega más platos y descripciones aquí
+    ];
+
     // Detectar el desplazamiento de rueda (scroll) para cambiar el video
     window.addEventListener("wheel", function (e) {
         if (e.deltaY > 0) {
             // Deslizar hacia abajo, cambiar al siguiente video
-            videoIndex = (videoIndex + 1) % videos.length;
+            scrollDirection = 1;
         } else {
             // Deslizar hacia arriba, cambiar al video anterior
-            videoIndex = (videoIndex - 1 + videos.length) % videos.length;
+            scrollDirection = -1;
         }
 
         // Cambiar el video y la descripción del plato
+        videoIndex = (videoIndex + scrollDirection + videos.length) % videos.length;
         video.src = videos[videoIndex];
         video.load();
         video.play();
 
-        if (videoIndex === 0) {
-            nombrePlato.textContent = "Restaurante";
-            nombreDelPlato.textContent = "Nombre del Plato";
-        } else if (videoIndex === 1) {
-            nombrePlato.textContent = "Spaguetti";
-            nombreDelPlato.textContent = "Precio 12€";
-        } else if (videoIndex === 2) {
-            nombrePlato.textContent = "Macarrones";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-         } else if (videoIndex === 3) {
-            nombrePlato.textContent = "Sopa de Sobre";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-         } else if (videoIndex === 4) {
-            nombrePlato.textContent = "Bandera";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-     } else if (videoIndex === 5) {
-            nombrePlato.textContent = "Colada Morada";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-     } else if (videoIndex === 6) {
-            nombrePlato.textContent = "Ensalada César";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-     } else if (videoIndex === 7) {
-            nombrePlato.textContent = "Calamares";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
-
-     } else if (videoIndex === 8) {
-            nombrePlato.textContent = "Gazpacho";
-            nombreDelPlato.textContent = "Precio 14€";
-        }
+        // Cambiar la descripción del plato
+        const platoActual = platos[videoIndex];
+        nombrePlato.textContent = platoActual.nombre;
+        nombreDelPlato.textContent = platoActual.descripcion;
     });
 
     // Función para reproducir el video en dispositivos móviles
@@ -254,5 +262,6 @@
         document.querySelector(".play-button").style.display = "none";
     }
 </script>
+
 </body>
 </html>
