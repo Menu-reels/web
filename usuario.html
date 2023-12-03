@@ -370,6 +370,7 @@ window.addEventListener("wheel", function (e) {
                 descripcion.classList.add("expandido");
                 textoExtra.style.display = "none";
                 verMenos.style.display = "inline";
+                verMas.style.display = "none";
             }
 
             // Función para mostrar el texto recortado
@@ -377,6 +378,7 @@ window.addEventListener("wheel", function (e) {
                 descripcion.classList.remove("expandido");
                 textoExtra.style.display = "inline";
                 verMenos.style.display = "none";
+                verMas.style.display = "inline";
             }
 
             // Agrega el evento click para "Ver Más"
