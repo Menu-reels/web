@@ -17,6 +17,8 @@
             background-color: #f0f0f0;
             font-family: 'Raleway';
             margin: 0; /* Elimina el margen predeterminado del body */
+            overflow: hidden; /* Evita que el video se desborde del body */
+            position: relative; /* Permite posicionar otros elementos en relación con el body */
         }
 
         /* Establece el 20% del viewport height para el encabezado */
@@ -114,15 +116,19 @@
             display: flex;
         }
 
-        /* Estilo para el video */
+        /* Estilo para el video de fondo */
         video {
-            width: 100%;
-            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Coloca el video detrás de los demás elementos */
         }
     </style>
 </head>
 <body>
-<video src="comida.mp4" autoplay loop muted></video> <!-- Agrega el video -->
+<video src="comida.mp4" autoplay loop muted></video> <!-- Agrega el video de fondo -->
 <header>
     <div>
         <i class="fa-solid fa-hand-point-down"></i>
