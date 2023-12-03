@@ -213,23 +213,22 @@ width: 30px;
     </div>
 </header>
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
-<div class="description-left">
+<div class="product-description">
+       <div class="description-left">
         <div class="restaurante">
             <img src="kitchen.png" alt="Logo Restaurante">
             <h1>Rossy's</h1>
         </div>
         <h2>Aji de Gallina</h2>
         <p class="precio">16€</p>
-        <p class="descripcion">
-            Queso feta, tomates cherry, miel, orégano y tomillo. Todos los complementos necesarios y además todas las especias que te puedas imaginar en un único plato.
-        </p>
-        <span class="VerMas">Ver Más</span>
-    </div>
-    <div class="description-right">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fas fa-heart"></i>
-        <i class="fas fa-plus"></i>
-    </div>
+        <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo. <span class="VerMás" onclick="mostrarDescripcionCompleta()">Ver Más</span></p>
+        <span class="VerMas">Ver Menos</span>
+      </div>
+        <div class="description-right">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+        </div>
 </div>
 <div class="categorias">
     <div class="categorias-arrow" id="left-arrow" style="left: 0; bottom: 10px;">
@@ -339,7 +338,6 @@ window.addEventListener("wheel", function (e) {
 
 // Elementos HTML para actualizar
 const descripcion = document.querySelector(".descripcion");
-const verMas = document.querySelector(".VerMas");
 
 // Texto completo y texto truncado
 const textoCompleto = descripcion.textContent;
