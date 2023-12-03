@@ -55,6 +55,7 @@
 .description-left {
   flex: 70%;
   padding: 20px;
+text-align: initial;
 }
 
 .description-right {
@@ -104,6 +105,10 @@ width: 50px;
     color: #333; /* Color de los iconos */
     cursor: pointer;
   }
+
+      .restaurante{
+            display: flex;
+      }
 </style>
 
 </head>
@@ -123,8 +128,10 @@ width: 50px;
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
 <div class="product-description">
     <div class="description-left">
-        <img src="kitchen.png" alt="Logo Restaurante">
-        <h1>Restaurante</h1>
+        <div class="restaurante">
+            <img src="kitchen.png" alt="Logo Restaurante">
+            <h1>Restaurante</h1>
+      </div>
         <h2>Nombre del Plato</h2>
         <p class="precio">16€</p>
         <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo.</p>
