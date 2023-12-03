@@ -41,6 +41,66 @@
         font-size: 24px;
         color: #333;
     }
+
+.product-description {
+    display: flex;
+  }
+
+  .description-left {
+    flex: 70%;
+    padding: 20px;
+  }
+
+  .description-right {
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+  }
+
+  .description-left img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .description-left h1 {
+    font-size: 24px;
+  }
+
+  .description-left h2 {
+    font-size: 18px;
+  }
+
+  .description-left p.precio {
+    font-size: 16px;
+    color: #ff0000; /* Color de precio */
+  }
+
+  .description-left p.descripcion {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .description-left span.VerMás {
+    font-size: 12px;
+    color: #0077cc; /* Color del enlace Ver Más */
+    cursor: pointer;
+  }
+
+  .description-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .description-right i {
+    font-size: 24px;
+    margin: 10px;
+    color: #333; /* Color de los iconos */
+    cursor: pointer;
+  }
 </style>
 
 </head>
@@ -48,7 +108,7 @@
 
 <header>
     <div>
-        <img src="tu_icono.png" alt="Icono 1">
+        <i class="fa-solid fa-hand-point-down"></i>
     </div>
     <div>
         <h1>Menu</h1>
@@ -57,6 +117,20 @@
         <i class="fa-regular fa-note-sticky"></i>
     </div>
 </header>
-
+<div class="product-description">
+  <div class="description-left">
+    <img src="logo.jpg" alt="Logo Restaurante">
+    <h1>Restaurante</h1>
+    <h2>Nombre del Plato</h2>
+    <p class="precio">16€</p>
+    <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo.</p>
+    <span class="VerMás">Ver Más</span>
+  </div>
+  <div class="description-right">
+    <i class="fas fa-hamburger"></i> <!-- Icono de bocadillo -->
+    <i class="fas fa-heart"></i> <!-- Icono de corazón -->
+    <i class="fas fa-plus"></i> <!-- Icono de más -->
+  </div>
+</div>
 </body>
 </html>
