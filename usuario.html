@@ -140,6 +140,53 @@
             padding: 10px 20px;
             cursor: pointer;
         }
+
+/* Estilo para la sección de categorías */
+.categorias {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  buttom: 0;
+}
+
+/* Contenedor de las imágenes */
+.categorias-container {
+  display: flex;
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  scroll-snap-type: x proximity; /* Facilita el desplazamiento suave */
+  -webkit-overflow-scrolling: touch; /* Compatibilidad con desplazamiento táctil en iOS */
+  padding: 10px 0;
+}
+
+/* Estilo para cada imagen */
+.categoria-imagen {
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0; /* Evita que las imágenes se reduzcan */
+  margin: 0 10px; /* Espacio entre las imágenes */
+  scroll-snap-align: start; /* Alineación para un desplazamiento suave */
+}
+
+/* Estilo para las flechas de navegación */
+.categorias-arrow {
+  width: 50px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.categorias-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
     </style>
 </head>
 <body>
@@ -177,6 +224,23 @@
         <i class="fas fa-plus"></i>
     </div>
 </div>
+<div class="categorias">
+  <div class="categorias-arrow" id="left-arrow">
+    &lt;
+  </div>
+  <div class="categorias-container">
+    <img src="imagen1.png" alt="Imagen 1" class="categoria-imagen">
+    <img src="imagen2.png" alt="Imagen 2" class="categoria-imagen">
+    <img src="imagen3.png" alt="Imagen 3" class="categoria-imagen">
+    <img src="imagen4.png" alt="Imagen 4" class="categoria-imagen">
+    <img src="imagen5.png" alt="Imagen 5" class="categoria-imagen">
+    <!-- Agrega más imágenes aquí si es necesario -->
+  </div>
+  <div class="categorias-arrow" id="right-arrow">
+    &gt;
+  </div>
+</div>
+
 <script>
     const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
     let videoIndex = 0;
