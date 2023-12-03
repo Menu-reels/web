@@ -221,9 +221,8 @@ width: 30px;
         </div>
         <h2>Aji de Gallina</h2>
         <p class="precio">16€</p>
-        <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo. <span class="VerMás" onclick="mostrarDescripcionCompleta()">Ver Más</span></p>
-        <span class="VerMas">Ver Menos</span>
-      </div>
+        <p class="descripcion-truncada">Queso feta, tomates cherry, miel, orégano y tomillo. <span class="VerMas" onclick="mostrarDescripcionCompleta()">Ver Más</span></p>
+    </div>
         <div class="description-right">
             <i class="fa-solid fa-bars"></i>
             <i class="fas fa-heart"></i>
@@ -252,21 +251,24 @@ const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comi
 let videoIndex = 0;
 
 // Elementos HTML para actualizar
-const nombreDelPlato = document.querySelector(".description-left h2");
-const precioPlato = document.querySelector(".description-left p.precio");
-const descripcionTruncada = document.querySelector(".description-left p.descripcion-truncada");
-const descripcionCompleta = document.querySelector(".description-left p.descripcion-completa");
-const verMas = document.querySelector(".description-left span.VerMas");
-const verMenos = document.querySelector(".description-left span.VerMenos");
+// Variables para los videos y la descripción
+    const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
+    let videoIndex = 0;
 
-// Inicializar el video
-const video = document.getElementById("background-video");
-video.src = videos[videoIndex];
-video.load();
-video.play();
+    // Elementos HTML para actualizar
+    const nombreDelPlato = document.querySelector(".description-left h2");
+    const precioPlato = document.querySelector(".description-left p.precio");
+    const descripcionTruncada = document.querySelector(".descripcion-truncada");
+    const verMas = document.querySelector(".VerMas");
 
-// Descripciones de los platos
-const platos = [
+    // Inicializar el video
+    const video = document.getElementById("background-video");
+    video.src = videos[videoIndex];
+    video.load();
+    video.play();
+
+    // Descripciones de los platos
+    const platos = [
     {
         nombre: "Aji de Gallina",
         precio: "16€",
@@ -313,55 +315,40 @@ const platos = [
         descripcion: "Descripción del Gazpacho."
     }
 ];
-// Detectar el desplazamiento de rueda (scroll) para cambiar el video
-window.addEventListener("wheel", function (e) {
-    if (e.deltaY > 0) {
-        // Deslizar hacia abajo, cambiar al siguiente video
-        videoIndex = (videoIndex + 1) % videos.length;
-    } else {
-        // Deslizar hacia arriba, cambiar al video anterior
-        videoIndex = (videoIndex - 1 + videos.length) % videos.length;
+ // Detectar el desplazamiento de rueda (scroll) para cambiar el video
+    window.addEventListener("wheel", function (e) {
+        if (e.deltaY > 0) {
+            // Deslizar hacia abajo, cambiar al siguiente video
+            videoIndex = (videoIndex + 1) % videos.length;
+        } else {
+            // Deslizar hacia arriba, cambiar al video anterior
+            videoIndex = (videoIndex - 1 + videos.length) % videos.length;
+        }
+
+        // Cambiar el video
+        video.src = videos[videoIndex];
+        video.load();
+        video.play();
+
+        // Cambiar la descripción del plato
+        const platoActual = platos[videoIndex];
+        nombreDelPlato.textContent = platoActual.nombre;
+        precioPlato.textContent = platoActual.precio;
+        descripcionTruncada.textContent = platoActual.descripcion.slice(0, 144);
+    });
+
+    // Función para mostrar la descripción completa
+    function mostrarDescripcionCompleta() {
+        const platoActual = platos[videoIndex];
+        descripcionTruncada.textContent = platoActual.descripcion;
+        verMas.style.display = "none";
     }
 
-    // Cambiar el video
-    video.src = videos[videoIndex];
-    video.load();
-    video.play();
-
-    // Cambiar la descripción del plato
-    const platoActual = platos[videoIndex];
-    nombreDelPlato.textContent = platoActual.nombre;
-    precioPlato.textContent = platoActual.precio;
-});
-
-
-
-// Elementos HTML para actualizar
-const descripcion = document.querySelector(".descripcion");
-
-// Texto completo y texto truncado
-const textoCompleto = descripcion.textContent;
-const textoTruncado = textoCompleto.slice(0, 144);
-
-// Estado inicial: mostrar descripción truncada y "Ver Más"
-descripcion.textContent = textoTruncado;
-let descripcionCompleta = false;
-
-// Función para mostrar la descripción completa
-function mostrarDescripcionCompleta() {
-    if (!descripcionCompleta) {
-        descripcion.textContent = textoCompleto;
-        verMas.textContent = "Ver Menos";
-        descripcionCompleta = true;
-    } else {
-        descripcion.textContent = textoTruncado;
-        verMas.textContent = "Ver Más";
-        descripcionCompleta = false;
+    // Función para reproducir el video en dispositivos móviles
+    function playVideo() {
+        video.play();
+        document.querySelector(".play-button").style.display = "none";
     }
-}
-
-// Manejar el evento clic en "Ver Más"/"Ver Menos"
-verMas.addEventListener("click", mostrarDescripcionCompleta);
 
 
 
