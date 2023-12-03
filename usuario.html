@@ -247,9 +247,13 @@ width: 30px;
 let videoIndex = 0;
 
 // Elementos HTML para actualizar
-const nombreDelPlato = document.querySelector(".description-left h2");
-const precioPlato = document.querySelector(".description-left p.precio");
-const descripcionPlato = document.querySelector(".description-left p.descripcion");
+  const nombreDelPlato = document.querySelector(".description-left h2");
+  const precioPlato = document.querySelector(".description-left p.precio");
+  const descripcionTruncada = document.querySelector(".description-left p.descripcion-truncada");
+  const descripcionCompleta = document.querySelector(".description-left p.descripcion-completa");
+  const verMas = document.querySelector(".description-left span.VerMas");
+  const verMenos = document.querySelector(".description-left span.VerMenos");
+
 
 // Inicializar el video
 const video = document.getElementById("background-video");
