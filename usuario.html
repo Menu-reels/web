@@ -243,17 +243,16 @@ width: 30px;
   </div>
 
 <script>
-  const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
+const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
 let videoIndex = 0;
 
 // Elementos HTML para actualizar
-  const nombreDelPlato = document.querySelector(".description-left h2");
-  const precioPlato = document.querySelector(".description-left p.precio");
-  const descripcionTruncada = document.querySelector(".description-left p.descripcion-truncada");
-  const descripcionCompleta = document.querySelector(".description-left p.descripcion-completa");
-  const verMas = document.querySelector(".description-left span.VerMas");
-  const verMenos = document.querySelector(".description-left span.VerMenos");
-
+const nombreDelPlato = document.querySelector(".description-left h2");
+const precioPlato = document.querySelector(".description-left p.precio");
+const descripcionTruncada = document.querySelector(".description-left p.descripcion-truncada");
+const descripcionCompleta = document.querySelector(".description-left p.descripcion-completa");
+const verMas = document.querySelector(".description-left span.VerMas");
+const verMenos = document.querySelector(".description-left span.VerMenos");
 
 // Inicializar el video
 const video = document.getElementById("background-video");
@@ -309,7 +308,6 @@ const platos = [
         descripcion: "Descripción del Gazpacho."
     }
 ];
-
 // Detectar el desplazamiento de rueda (scroll) para cambiar el video
 window.addEventListener("wheel", function (e) {
     if (e.deltaY > 0) {
@@ -329,45 +327,32 @@ window.addEventListener("wheel", function (e) {
     const platoActual = platos[videoIndex];
     nombreDelPlato.textContent = platoActual.nombre;
     precioPlato.textContent = platoActual.precio;
-    descripcionPlato.textContent = platoActual.descripcion;
-});
-
-
-  // Función para mostrar la descripción completa
-    function mostrarDescripcionCompleta() {
-        descripcionTruncada.style.display = "none";
-        descripcionCompleta.style.display = "block";
-        verMas.style.display = "none";
-        verMenos.style.display = "inline";
-    }
-
-    // Función para mostrar la descripción truncada
-    function mostrarDescripcionTruncada() {
-        descripcionTruncada.style.display = "block";
-        descripcionCompleta.style.display = "none";
-        verMas.style.display = "inline";
-        verMenos.style.display = "none";
-    }
-
-    // Manejar el evento clic en "Ver Más"
-    verMas.addEventListener("click", mostrarDescripcionCompleta);
-
-    // Manejar el evento clic en "Ver Menos"
-    verMenos.addEventListener("click", mostrarDescripcionTruncada);
-
-    // ...
-
-    // Cambiar la descripción del plato
-    const platoActual = platos[videoIndex];
-    nombrePlato.textContent = platoActual.nombre;
-    precioPlato.textContent = platoActual.precio;
     descripcionTruncada.textContent = platoActual.descripcion.slice(0, 144);
     descripcionCompleta.textContent = platoActual.descripcion;
     mostrarDescripcionTruncada(); // Mostrar inicialmente la descripción truncada
+});
 
-    // ...
+// Función para mostrar la descripción completa
+function mostrarDescripcionCompleta() {
+    descripcionTruncada.style.display = "none";
+    descripcionCompleta.style.display = "block";
+    verMas.style.display = "none";
+    verMenos.style.display = "inline";
+}
 
+// Función para mostrar la descripción truncada
+function mostrarDescripcionTruncada() {
+    descripcionTruncada.style.display = "block";
+    descripcionCompleta.style.display = "none";
+    verMas.style.display = "inline";
+    verMenos.style.display = "none";
+}
 
+// Manejar el evento clic en "Ver Más"
+verMas.addEventListener("click", mostrarDescripcionCompleta);
+
+// Manejar el evento clic en "Ver Menos"
+verMenos.addEventListener("click", mostrarDescripcionTruncada);
 
     // Función para reproducir el video en dispositivos móviles
     function playVideo() {
