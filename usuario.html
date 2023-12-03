@@ -173,18 +173,27 @@
 
 /* Estilo para las flechas de navegación */
 .categorias-arrow {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  position: absolute;
-  top: 0;
-  transition: background-color 0.3s;
+width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(108 92 92 / 50%);
+    color: white;
+    position: absolute;
+    transition: background-color 0.3s;
 }
+.categorias-arrow #right-arrow {
+    right: 0;
+    bottom: 10px;
+}
+
+.categorias-arrow #left-arrow {
+    left: 0;
+    bottom: 10px;
+}
+
 
 .categorias-arrow:hover {
   background-color: rgba(0, 0, 0, 0.7);
