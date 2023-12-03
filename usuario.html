@@ -315,23 +315,24 @@ const platos = [
 // Función para mostrar la descripción completa o truncada
 let descripcionCompleta = false;
 
+// Función para mostrar la descripción completa o truncada
 function mostrarDescripcion() {
     const platoActual = platos[videoIndex];
     const descripcionTexto = platoActual.descripcion;
     
     if (descripcionCompleta) {
         descripcion.textContent = descripcionTexto.slice(0, 144) + "...";
-        verMas.textContent = "Ver Más";
     } else {
         descripcion.textContent = descripcionTexto;
-        verMas.textContent = "Ver Menos";
     }
     
     descripcionCompleta = !descripcionCompleta;
+    verMas.textContent = descripcionCompleta ? "Ver Menos" : "Ver Más";
 }
 
 // Manejar el evento clic en "Ver Más"/"Ver Menos"
 verMas.addEventListener("click", mostrarDescripcion);
+
 
 // Detectar el desplazamiento de rueda (scroll) para cambiar el video
 window.addEventListener("wheel", function (e) {
