@@ -146,8 +146,10 @@
 .categorias {
   width: 100%;
   overflow: hidden;
-  position: fixed;
-  bottom: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Contenedor de las imágenes */
@@ -162,16 +164,17 @@
 /* Estilo para cada imagen */
 .categoria-imagen {
   width: 30px;
+  height: 30px;
   flex-shrink: 0; /* Evita que las imágenes se reduzcan */
   margin: 0 10px; /* Espacio entre las imágenes */
   scroll-snap-align: start; /* Alineación para un desplazamiento suave */
-    cursor: pointe;
+  cursor: pointer;
 }
 
 /* Estilo para las flechas de navegación */
 .categorias-arrow {
-  width: 50px;
-  height: 100px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,7 +183,6 @@
   color: white;
   position: absolute;
   top: 0;
-  z-index: 1;
   transition: background-color 0.3s;
 }
 
@@ -226,21 +228,21 @@
     </div>
 </div>
 <div class="categorias">
-  <div class="categorias-arrow" id="left-arrow">
-    &lt;
+    <div class="categorias-arrow" id="left-arrow">
+      &lt;
+    </div>
+    <div class="categorias-container">
+      <img src="imagen1.png" alt="Imagen 1" class="categoria-imagen">
+      <img src="imagen2.png" alt="Imagen 2" class="categoria-imagen">
+      <img src="imagen3.png" alt="Imagen 3" class="categoria-imagen">
+      <img src="imagen4.png" alt="Imagen 4" class="categoria-imagen">
+      <img src="imagen5.png" alt="Imagen 5" class="categoria-imagen">
+      <!-- Agrega más imágenes aquí si es necesario -->
+    </div>
+    <div class="categorias-arrow" id="right-arrow">
+      &gt;
+    </div>
   </div>
-  <div class="categorias-container">
-    <img src="imagen1.png" alt="Imagen 1" class="categoria-imagen">
-    <img src="imagen2.png" alt="Imagen 2" class="categoria-imagen">
-    <img src="imagen3.png" alt="Imagen 3" class="categoria-imagen">
-    <img src="imagen4.png" alt="Imagen 4" class="categoria-imagen">
-    <img src="imagen5.png" alt="Imagen 5" class="categoria-imagen">
-    <!-- Agrega más imágenes aquí si es necesario -->
-  </div>
-  <div class="categorias-arrow" id="right-arrow">
-    &gt;
-  </div>
-</div>
 
 <script>
     const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
@@ -327,49 +329,49 @@
         document.querySelector(".play-button").style.display = "none";
     }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const categoriasContainer = document.querySelector(".categorias-container");
-    const leftArrow = document.getElementById("left-arrow");
-    const rightArrow = document.getElementById("right-arrow");
-    const scrollDistance = 150; // Cambia este valor según tu preferencia
+    document.addEventListener("DOMContentLoaded", function () {
+      const categoriasContainer = document.querySelector(".categorias-container");
+      const leftArrow = document.getElementById("left-arrow");
+      const rightArrow = document.getElementById("right-arrow");
+      const scrollDistance = 150; // Cambia este valor según tu preferencia
 
-    // Desplazamiento hacia la izquierda al hacer clic en la flecha izquierda
-    leftArrow.addEventListener("click", function () {
-      categoriasContainer.scrollLeft -= scrollDistance;
+      // Desplazamiento hacia la izquierda al hacer clic en la flecha izquierda
+      leftArrow.addEventListener("click", function () {
+        categoriasContainer.scrollLeft -= scrollDistance;
+      });
+
+      // Desplazamiento hacia la derecha al hacer clic en la flecha derecha
+      rightArrow.addEventListener("click", function () {
+        categoriasContainer.scrollLeft += scrollDistance;
+      });
+
+      // Detectar desplazamiento táctil (swipe) en dispositivos móviles
+      let touchStartX = null;
+
+      categoriasContainer.addEventListener("touchstart", function (e) {
+        touchStartX = e.touches[0].clientX;
+      });
+
+      categoriasContainer.addEventListener("touchmove", function (e) {
+        if (touchStartX === null) return;
+        const touchEndX = e.touches[0].clientX;
+        const deltaX = touchStartX - touchEndX;
+
+        if (deltaX > 0) {
+          // Desplazamiento hacia la izquierda
+          categoriasContainer.scrollLeft += deltaX;
+        } else {
+          // Desplazamiento hacia la derecha
+          categoriasContainer.scrollLeft += deltaX;
+        }
+
+        touchStartX = touchEndX;
+      });
+
+      categoriasContainer.addEventListener("touchend", function () {
+        touchStartX = null;
+      });
     });
-
-    // Desplazamiento hacia la derecha al hacer clic en la flecha derecha
-    rightArrow.addEventListener("click", function () {
-      categoriasContainer.scrollLeft += scrollDistance;
-    });
-
-    // Detectar desplazamiento táctil (swipe) en dispositivos móviles
-    let touchStartX = null;
-
-    categoriasContainer.addEventListener("touchstart", function (e) {
-      touchStartX = e.touches[0].clientX;
-    });
-
-    categoriasContainer.addEventListener("touchmove", function (e) {
-      if (touchStartX === null) return;
-      const touchEndX = e.touches[0].clientX;
-      const deltaX = touchStartX - touchEndX;
-
-      if (deltaX > 0) {
-        // Desplazamiento hacia la izquierda
-        categoriasContainer.scrollLeft += deltaX;
-      } else {
-        // Desplazamiento hacia la derecha
-        categoriasContainer.scrollLeft += deltaX;
-      }
-
-      touchStartX = touchEndX;
-    });
-
-    categoriasContainer.addEventListener("touchend", function () {
-      touchStartX = null;
-    });
-  });
 </script>
 
 </body>
