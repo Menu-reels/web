@@ -322,12 +322,13 @@ function mostrarDescripcion() {
     
     if (descripcionCompleta) {
         descripcion.textContent = descripcionTexto.slice(0, 144) + "...";
+        verMas.textContent = "Ver Más";
     } else {
         descripcion.textContent = descripcionTexto;
+        verMas.textContent = "Ver Menos";
     }
     
     descripcionCompleta = !descripcionCompleta;
-    verMas.textContent = descripcionCompleta ? "Ver Menos" : "Ver Más";
 }
 
 // Manejar el evento clic en "Ver Más"/"Ver Menos"
