@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="matchpoint.png" type="image/x-icon">
+    <link rel="icon" href="kitchen.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
@@ -187,6 +187,12 @@ width: 30px;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+        .verMenos{
+        font-size: 12px;
+    color: #0077cc;
+    cursor: pointer;
+    }
+
     </style>
 </head>
 <body>
@@ -207,18 +213,18 @@ width: 30px;
     </div>
 </header>
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
-<div class="product-description">
-   <div class="description-left">
-    <div class="restaurante">
-        <img src="kitchen.png" alt="Logo Restaurante">
-        <h1>Rossy's</h1>
+<div class="description-left">
+        <div class="restaurante">
+            <img src="kitchen.png" alt="Logo Restaurante">
+            <h1>Rossy's</h1>
+        </div>
+        <h2>Aji de Gallina</h2>
+        <p class="precio">16€</p>
+        <p class="descripcion">
+            Queso feta, tomates cherry, miel, orégano y tomillo. Todos los complementos necesarios y además todas las especias que te puedas imaginar en un único plato.
+        </p>
+        <span class="VerMas">Ver Más</span>
     </div>
-    <h2>Aji de Gallina</h2>
-    <p class="precio">16€</p>
-    <p class="descripcion-truncada">Queso feta, tomates cherry, miel, orégano y tomillo. <span class="VerMas">Ver Más</span></p>
-    <p class="descripcion-completa" style="display: none;">Descripción completa del plato que es más larga y contiene más detalles. <span class="VerMenos">Ver Menos</span></p>
-</div>
-
     <div class="description-right">
         <i class="fa-solid fa-bars"></i>
         <i class="fas fa-heart"></i>
@@ -327,32 +333,40 @@ window.addEventListener("wheel", function (e) {
     const platoActual = platos[videoIndex];
     nombreDelPlato.textContent = platoActual.nombre;
     precioPlato.textContent = platoActual.precio;
-    descripcionTruncada.textContent = platoActual.descripcion.slice(0, 144);
-    descripcionCompleta.textContent = platoActual.descripcion;
-    mostrarDescripcionTruncada(); // Mostrar inicialmente la descripción truncada
 });
+
+
+
+// Elementos HTML para actualizar
+const descripcion = document.querySelector(".descripcion");
+const verMas = document.querySelector(".VerMas");
+
+// Texto completo y texto truncado
+const textoCompleto = descripcion.textContent;
+const textoTruncado = textoCompleto.slice(0, 144);
+
+// Estado inicial: mostrar descripción truncada y "Ver Más"
+descripcion.textContent = textoTruncado;
+let descripcionCompleta = false;
 
 // Función para mostrar la descripción completa
 function mostrarDescripcionCompleta() {
-    descripcionTruncada.style.display = "none";
-    descripcionCompleta.style.display = "block";
-    verMas.style.display = "none";
-    verMenos.style.display = "inline";
+    if (!descripcionCompleta) {
+        descripcion.textContent = textoCompleto;
+        verMas.textContent = "Ver Menos";
+        descripcionCompleta = true;
+    } else {
+        descripcion.textContent = textoTruncado;
+        verMas.textContent = "Ver Más";
+        descripcionCompleta = false;
+    }
 }
 
-// Función para mostrar la descripción truncada
-function mostrarDescripcionTruncada() {
-    descripcionTruncada.style.display = "block";
-    descripcionCompleta.style.display = "none";
-    verMas.style.display = "inline";
-    verMenos.style.display = "none";
-}
-
-// Manejar el evento clic en "Ver Más"
+// Manejar el evento clic en "Ver Más"/"Ver Menos"
 verMas.addEventListener("click", mostrarDescripcionCompleta);
 
-// Manejar el evento clic en "Ver Menos"
-verMenos.addEventListener("click", mostrarDescripcionTruncada);
+
+
 
     // Función para reproducir el video en dispositivos móviles
     function playVideo() {
