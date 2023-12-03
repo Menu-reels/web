@@ -220,7 +220,7 @@ width: 30px;
         </div>
         <h2>Aji de Gallina</h2>
         <p class="precio">16€</p>
-      <p class="descripcion">Chorizo de Burgos. con tomate de centeno , aguacate , salchicas , patatas , gofres, chocolate y naranjas envueltas de albaricoque con queso chi<span class="texto-extra" style="display:none"> Ver Menos</span></p>
+      <p class="descripcion"><span class="texto-extra" style="display:none"> Ver Menos</span></p>
 <span class="VerMas">Ver Más</span>
 <span class="VerMenos" style="display:none">Ver Menos</span>
 
@@ -313,7 +313,7 @@ const platos = [
     }
 ];
 
-// Mostrar la descripción completa sin truncar
+
 function mostrarDescripcion() {
     const platoActual = platos[videoIndex];
     const descripcionTexto = platoActual.descripcion;
@@ -344,6 +344,44 @@ window.addEventListener("wheel", function (e) {
     precioPlato.textContent = platoActual.precio;
     mostrarDescripcion(); // Mostrar siempre la descripción completa
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const textoExtra = document.querySelector(".texto-extra");
+  const verMas = document.querySelector(".VerMas");
+  const verMenos = document.querySelector(".VerMenos");
+
+  // Función para mostrar el texto completo
+  function mostrarTextoCompleto() {
+    descripcion.classList.add("expandido");
+    textoExtra.style.display = "none";
+    verMenos.style.display = "inline";
+  }
+
+  // Función para mostrar el texto recortado
+  function mostrarTextoRecortado() {
+    descripcion.classList.remove("expandido");
+    textoExtra.style.display = "inline";
+    verMenos.style.display = "none";
+  }
+
+  // Agrega el evento click para "Ver Más"
+  verMas.addEventListener("click", mostrarTextoCompleto);
+
+  // Agrega el evento click para "Ver Menos"
+  verMenos.addEventListener("click", mostrarTextoRecortado);
+
+  // Verifica el estado inicial
+  if (descripcion.textContent.length > 100) {
+    const textoRecortado = descripcion.textContent.slice(0, 100) + "...";
+    descripcion.innerHTML = textoRecortado;
+    descripcion.appendChild(textoExtra);
+    mostrarTextoRecortado();
+  }
+});
+
+
+    
 
 
     // Función para reproducir el video en dispositivos móviles
