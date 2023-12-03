@@ -208,16 +208,17 @@ width: 30px;
 </header>
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
 <div class="product-description">
-    <div class="description-left">
-        <div class="restaurante">
-            <img src="kitchen.png" alt="Logo Restaurante">
-            <h1>Restaurante</h1>
-        </div>
-        <h2>Nombre del Plato</h2>
-        <p class="precio">16€</p>
-        <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo.</p>
-        <span class="VerMás">Ver Más</span>
+   <div class="description-left">
+    <div class="restaurante">
+        <img src="kitchen.png" alt="Logo Restaurante">
+        <h1>Rossy's</h1>
     </div>
+    <h2>Aji de Gallina</h2>
+    <p class="precio">16€</p>
+    <p class="descripcion-truncada">Queso feta, tomates cherry, miel, orégano y tomillo. <span class="VerMás">Ver Más</span></p>
+    <p class="descripcion-completa" style="display: none;">Descripción completa del plato que es más larga y contiene más detalles. <span class="VerMenos">Ver Menos</span></p>
+</div>
+
     <div class="description-right">
         <i class="fa-solid fa-bars"></i>
         <i class="fas fa-heart"></i>
@@ -326,6 +327,42 @@ window.addEventListener("wheel", function (e) {
     precioPlato.textContent = platoActual.precio;
     descripcionPlato.textContent = platoActual.descripcion;
 });
+
+
+  // Función para mostrar la descripción completa
+    function mostrarDescripcionCompleta() {
+        descripcionTruncada.style.display = "none";
+        descripcionCompleta.style.display = "block";
+        verMas.style.display = "none";
+        verMenos.style.display = "inline";
+    }
+
+    // Función para mostrar la descripción truncada
+    function mostrarDescripcionTruncada() {
+        descripcionTruncada.style.display = "block";
+        descripcionCompleta.style.display = "none";
+        verMas.style.display = "inline";
+        verMenos.style.display = "none";
+    }
+
+    // Manejar el evento clic en "Ver Más"
+    verMas.addEventListener("click", mostrarDescripcionCompleta);
+
+    // Manejar el evento clic en "Ver Menos"
+    verMenos.addEventListener("click", mostrarDescripcionTruncada);
+
+    // ...
+
+    // Cambiar la descripción del plato
+    const platoActual = platos[videoIndex];
+    nombrePlato.textContent = platoActual.nombre;
+    precioPlato.textContent = platoActual.precio;
+    descripcionTruncada.textContent = platoActual.descripcion.slice(0, 144);
+    descripcionCompleta.textContent = platoActual.descripcion;
+    mostrarDescripcionTruncada(); // Mostrar inicialmente la descripción truncada
+
+    // ...
+
 
 
     // Función para reproducir el video en dispositivos móviles
