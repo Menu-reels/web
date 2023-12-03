@@ -214,22 +214,23 @@ width: 30px;
 </header>
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
 <div class="product-description">
-       <div class="description-left">
+    <div class="description-left">
         <div class="restaurante">
             <img src="kitchen.png" alt="Logo Restaurante">
             <h1>Rossy's</h1>
         </div>
         <h2>Aji de Gallina</h2>
         <p class="precio">16€</p>
-        <p class="descripcion-truncada">Queso feta, tomates cherry, miel, orégano y tomillo. </p>
-        <span class="VerMas" onclick="mostrarDescripcionCompleta()">Ver Más</span>
+        <p class="descripcion-truncada">Queso feta, tomates cherry, miel, orégano y tomillo.</p>
+        <span class="VerMas" onclick="mostrarDescripcion()">Ver Más</span>
     </div>
-        <div class="description-right">
-            <i class="fa-solid fa-bars"></i>
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-        </div>
+    <div class="description-right">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-plus"></i>
+    </div>
 </div>
+
 <div class="categorias">
     <div class="categorias-arrow" id="left-arrow" style="left: 0; bottom: 10px;">
       &lt;
@@ -354,6 +355,7 @@ window.addEventListener("wheel", function (e) {
     precioPlato.textContent = platoActual.precio;
     mostrarDescripcion(); // Mostrar inicialmente la descripción truncada o completa según el estado
 });
+
 
 
     // Función para reproducir el video en dispositivos móviles
