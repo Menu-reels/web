@@ -145,7 +145,6 @@
 <body>
 <video id="background-video" autoplay loop muted>
     <source src="comida.mp4" type="video/mp4">
-    <source src="comida2.mp4" type="video/mp4">
 </video>
 <!-- Botón de reproducción para dispositivos móviles -->
 <button class="play-button" onclick="playVideo()">Reproducir</button>
@@ -165,9 +164,9 @@
     <div class="description-left">
         <div class="restaurante">
             <img src="kitchen.png" alt="Logo Restaurante">
-            <h1 id="nombrePlato">Restaurante</h1>
+            <h1>Restaurante</h1>
         </div>
-        <h2 id="nombreDelPlato">Nombre del Plato</h2>
+        <h2>Nombre del Plato</h2>
         <p class="precio">16€</p>
         <p class="descripcion">Queso feta, tomates cherry, miel, orégano y tomillo.</p>
         <span class="VerMás">Ver Más</span>
@@ -178,27 +177,43 @@
         <i class="fas fa-plus"></i>
     </div>
 </div>
-<!-- Script para reproducir el video en dispositivos móviles y cambiar el plato -->
+<!-- Script para reproducir el video en dispositivos móviles -->
 <script>
-    var video = document.getElementById("background-video");
-    var nombrePlato = document.getElementById("nombrePlato");
-    var nombreDelPlato = document.getElementById("nombreDelPlato");
-    var videoIndex = 0; // Índice del video actual
+    const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
+    let videoIndex = 0;
 
-    video.addEventListener("ended", function () {
-        // Cambiar el video al finalizar
-        videoIndex = (videoIndex + 1) % 2;
-        video.src = videoIndex === 0 ? "comida.mp4" : "comida2.mp4";
+    const nombrePlato = document.querySelector(".description-left h1");
+    const nombreDelPlato = document.querySelector(".description-left h2");
+
+    // Inicializar el video y la descripción del plato
+    video.src = videos[videoIndex];
+    video.load();
+    video.play();
+
+    // Detectar el desplazamiento de rueda (scroll) para cambiar el video
+    window.addEventListener("wheel", function (e) {
+        if (e.deltaY > 0) {
+            // Deslizar hacia abajo, cambiar al siguiente video
+            videoIndex = (videoIndex + 1) % videos.length;
+        } else {
+            // Deslizar hacia arriba, cambiar al video anterior
+            videoIndex = (videoIndex - 1 + videos.length) % videos.length;
+        }
+
+        // Cambiar el video y la descripción del plato
+        video.src = videos[videoIndex];
         video.load();
         video.play();
 
-        // Cambiar la descripción del plato
         if (videoIndex === 0) {
             nombrePlato.textContent = "Restaurante";
             nombreDelPlato.textContent = "Nombre del Plato";
-        } else {
-            nombrePlato.textContent = "Arroz con Pollo";
-            nombreDelPlato.textContent = "Precio 18€";
+        } else if (videoIndex === 1) {
+            nombrePlato.textContent = "Spaguetti";
+            nombreDelPlato.textContent = "Precio 12€";
+        } else if (videoIndex === 2) {
+            nombrePlato.textContent = "Macarrones con Chorizo";
+            nombreDelPlato.textContent = "Precio 14€";
         }
     });
 
@@ -207,40 +222,6 @@
         video.play();
         document.querySelector(".play-button").style.display = "none";
     }
-
-    // Detectar el desplazamiento de rueda (scroll) para cambiar el video
-    window.addEventListener("wheel", function (e) {
-        if (e.deltaY > 0) {
-            // Deslizar hacia abajo, cambiar al siguiente video
-            videoIndex = (videoIndex + 1) % 2;
-            video.src = videoIndex === 0 ? "comida.mp4" : "comida2.mp4";
-            video.load();
-            video.play();
-
-            // Cambiar la descripción del plato
-            if (videoIndex === 0) {
-                nombrePlato.textContent = "Restaurante";
-                nombreDelPlato.textContent = "Nombre del Plato";
-            } else {
-                nombrePlato.textContent = "Arroz con Pollo";
-                nombreDelPlato.textContent = "Precio 18€";
-            }
-        } else {
-            // Deslizar hacia arriba, cambiar al video anterior (en este caso, al mismo)
-            video.src = videoIndex === 0 ? "comida.mp4" : "comida2.mp4";
-            video.load();
-            video.play();
-
-            // Cambiar la descripción del plato
-            if (videoIndex === 0) {
-                nombrePlato.textContent = "Restaurante";
-                nombreDelPlato.textContent = "Nombre del Plato";
-            } else {
-                nombrePlato.textContent = "Arroz con Pollo";
-                nombreDelPlato.textContent = "Precio 18€";
-            }
-        }
-    });
 </script>
 </body>
 </html>
