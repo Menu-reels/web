@@ -54,7 +54,6 @@
             position: relative;
             margin-bottom: 0;
             padding: 20px;
-            background: rgba(225, 225, 225, 0.30);
             box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
             backdrop-filter: blur(19px);
         }
@@ -84,8 +83,8 @@
         }
 
         .description-left p.precio {
-            font-size: 16px;
-            color: #ff0000; /* Color de precio */
+            font-size: 25px;
+            color: #ff0000;
         }
 
         .description-left p.descripcion {
@@ -243,83 +242,91 @@ width: 30px;
   </div>
 
 <script>
-    const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
-    let videoIndex = 0;
+  const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
+let videoIndex = 0;
 
-    const nombrePlato = document.querySelector(".description-left h1");
-    const nombreDelPlato = document.querySelector(".description-left h2");
+// Elementos HTML para actualizar
+const nombreDelPlato = document.querySelector(".description-left h2");
+const precioPlato = document.querySelector(".description-left p.precio");
+const descripcionPlato = document.querySelector(".description-left p.descripcion");
 
-    // Inicializar el video y la descripción del plato
-    const video = document.getElementById("background-video");
+// Inicializar el video
+const video = document.getElementById("background-video");
+video.src = videos[videoIndex];
+video.load();
+video.play();
+
+// Descripciones de los platos
+const platos = [
+    {
+        nombre: "Aji de Gallina",
+        precio: "16€",
+        descripcion: "Queso feta, tomates cherry, miel, orégano y tomillo."
+    },
+    {
+        nombre: "Spaguetti",
+        precio: "12€",
+        descripcion: "Con queso mozzarella."
+    },
+    {
+        nombre: "Macarrones con Chorizo",
+        precio: "14€",
+        descripcion: "Chorizo de Burgos."
+    },
+    {
+        nombre: "Sopa de Sobre",
+        precio: "14€",
+        descripcion: "Descripción de la Sopa de Sobre."
+    },
+    {
+        nombre: "Bandera",
+        precio: "14€",
+        descripcion: "Descripción del Bandera."
+    },
+    {
+        nombre: "Colada Morada",
+        precio: "14€",
+        descripcion: "Descripción de la Colada Morada."
+    },
+    {
+        nombre: "Ensalada César",
+        precio: "14€",
+        descripcion: "Descripción de la Ensalada César."
+    },
+    {
+        nombre: "Calamares",
+        precio: "14€",
+        descripcion: "Descripción de los Calamares."
+    },
+    {
+        nombre: "Gazpacho",
+        precio: "14€",
+        descripcion: "Descripción del Gazpacho."
+    }
+];
+
+// Detectar el desplazamiento de rueda (scroll) para cambiar el video
+window.addEventListener("wheel", function (e) {
+    if (e.deltaY > 0) {
+        // Deslizar hacia abajo, cambiar al siguiente video
+        videoIndex = (videoIndex + 1) % videos.length;
+    } else {
+        // Deslizar hacia arriba, cambiar al video anterior
+        videoIndex = (videoIndex - 1 + videos.length) % videos.length;
+    }
+
+    // Cambiar el video
     video.src = videos[videoIndex];
     video.load();
     video.play();
 
-    // Variable para controlar la dirección del desplazamiento
-    let scrollDirection = 0;
+    // Cambiar la descripción del plato
+    const platoActual = platos[videoIndex];
+    nombreDelPlato.textContent = platoActual.nombre;
+    precioPlato.textContent = platoActual.precio;
+    descripcionPlato.textContent = platoActual.descripcion;
+});
 
-    // Descripciones de los platos
-    const platos = [
-        {
-            nombre: "Restaurante",
-            descripcion: "Nombre del Plato"
-        },
-        {
-            nombre: "Spaguetti",
-            descripcion: "Precio 12€"
-        },
-        {
-            nombre: "Macarrones con Chorizo",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Sopa de Sobre",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Bandera",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Colada Morada",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Ensalada César",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Calamares",
-            descripcion: "Precio 14€"
-        },
-        {
-            nombre: "Gazpacho",
-            descripcion: "Precio 14€"
-        },
-        // Agrega más platos y descripciones aquí
-    ];
-
-    // Detectar el desplazamiento de rueda (scroll) para cambiar el video
-    window.addEventListener("wheel", function (e) {
-        if (e.deltaY > 0) {
-            // Deslizar hacia abajo, cambiar al siguiente video
-            scrollDirection = 1;
-        } else {
-            // Deslizar hacia arriba, cambiar al video anterior
-            scrollDirection = -1;
-        }
-
-        // Cambiar el video y la descripción del plato
-        videoIndex = (videoIndex + scrollDirection + videos.length) % videos.length;
-        video.src = videos[videoIndex];
-        video.load();
-        video.play();
-
-        // Cambiar la descripción del plato
-        const platoActual = platos[videoIndex];
-        nombrePlato.textContent = platoActual.nombre;
-        nombreDelPlato.textContent = platoActual.descripcion;
-    });
 
     // Función para reproducir el video en dispositivos móviles
     function playVideo() {
