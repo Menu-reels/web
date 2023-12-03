@@ -346,40 +346,39 @@ window.addEventListener("wheel", function (e) {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-  const textoExtra = document.querySelector(".texto-extra");
-  const verMas = document.querySelector(".VerMas");
-  const verMenos = document.querySelector(".VerMenos");
+ document.addEventListener("DOMContentLoaded", function () {
+            const descripcion = document.querySelector(".descripcion");
+            const textoExtra = document.querySelector(".VerMenos");
+            const verMas = document.querySelector(".VerMas");
+            const verMenos = document.querySelector(".VerMenos");
 
-  // Función para mostrar el texto completo
-  function mostrarTextoCompleto() {
-    descripcion.classList.add("expandido");
-    textoExtra.style.display = "none";
-    verMenos.style.display = "inline";
-  }
+            // Función para mostrar el texto completo
+            function mostrarTextoCompleto() {
+                descripcion.classList.add("expandido");
+                textoExtra.style.display = "none";
+                verMenos.style.display = "inline";
+            }
 
-  // Función para mostrar el texto recortado
-  function mostrarTextoRecortado() {
-    descripcion.classList.remove("expandido");
-    textoExtra.style.display = "inline";
-    verMenos.style.display = "none";
-  }
+            // Función para mostrar el texto recortado
+            function mostrarTextoRecortado() {
+                descripcion.classList.remove("expandido");
+                textoExtra.style.display = "inline";
+                verMenos.style.display = "none";
+            }
 
-  // Agrega el evento click para "Ver Más"
-  verMas.addEventListener("click", mostrarTextoCompleto);
+            // Agrega el evento click para "Ver Más"
+            verMas.addEventListener("click", mostrarTextoCompleto);
 
-  // Agrega el evento click para "Ver Menos"
-  verMenos.addEventListener("click", mostrarTextoRecortado);
+            // Agrega el evento click para "Ver Menos"
+            verMenos.addEventListener("click", mostrarTextoRecortado);
 
-  // Verifica el estado inicial
-  if (descripcion.textContent.length > 100) {
-    const textoRecortado = descripcion.textContent.slice(0, 100) + "...";
-    descripcion.innerHTML = textoRecortado;
-    descripcion.appendChild(textoExtra);
-    mostrarTextoRecortado();
-  }
-});
-
+            // Verifica el estado inicial
+            if (descripcion.textContent.length > 100) {
+                const textoRecortado = descripcion.textContent.slice(0, 100) + "...";
+                descripcion.textContent = textoRecortado;
+                mostrarTextoRecortado();
+            }
+        });
 
     
 
