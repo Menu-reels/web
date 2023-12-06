@@ -28,7 +28,6 @@
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            height: 20vh;
             background: linear-gradient(1turn, rgba(27, 27, 27, 0), rgba(0, 0, 0, 0.667) 150%);
         }
 
@@ -235,6 +234,49 @@ iframe {
     width: 100%;
     height: 100%;
 }
+
+/* Estilos del popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Estilos del formulario de reseña */
+#popup-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario de comentario */
+#opcion,
+#comentario {
+    display: none;
+}
+
+/* Otros estilos según tu preferencia */
+
     </style>
 </head>
 <body>
@@ -251,18 +293,40 @@ iframe {
         controls="0" 
     ></iframe>
     -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close-button" id="close-button">X</span>
+        <h1 id="popup-title">Reseña</h1>
+        <form id="popup-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+            <label for="tel">Teléfono:</label>
+            <input type="tel" id="tel" required>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" required></textarea>
+            <button type="submit">Enviar Reseña</button>
+        </form>
+        <select id="opcion" style="display: none;">
+            <option value="camarero">Camarero</option>
+            <option value="cocinero">Cocinero</option>
+            <option value="jefe">Jefe</option>
+        </select>
+    </div>
+</div>
+
+
 
  <div class="carta" id="carta">
 <img class="imagen-plato" src="comida10.gif" data-src="comida1.gif">
 <header>
     <div>
-        <i class="fa-solid fa-hand-point-down"></i>
+        <i class="fa-solid fa-star"></i>
     </div>
     <div>
         <h1>Menu</h1>
     </div>
     <div>
-        <i class="fa-regular fa-note-sticky"></i>
+        <i class="fa-solid fa-comments"></i>
     </div>
 </header>
 <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
@@ -276,13 +340,12 @@ iframe {
         <p class="precio">16€</p>
         <p class="descripcion">El ceviche ecuatoriano se prepara principalmente con camarones o pescado, que se cocinan en jugo de limón y se mezclan con tomate, cebolla, cilantro y a veces, pimiento verde. Se sirve frío y es refrescante y picante.</p>
         <span class="VerMas">Ver Más</span>
-        <span class="VerMenos" style="display:none">Ver Menos</span>
     </div>
 
     <div class="description-right">
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-newspaper"><a href="#"></a></i>
         <i class="fas fa-heart"></i>
-        <i class="fas fa-plus"></i>
+        <i class="fa-brands fa-whatsapp"><a href="#"></i>
     </div>
 </div>
 
@@ -471,6 +534,78 @@ iframe {
         touchStartX = null;
       });
     });
+
+
+// Función para mostrar el popup de reseña
+function mostrarResenaPopup() {
+    const popup = document.getElementById("popup");
+    const popupTitle = document.getElementById("popup-title");
+    const popupForm = document.getElementById("popup-form");
+    const opcion = document.getElementById("opcion");
+    
+    popup.style.display = "block";
+    popupTitle.textContent = "Reseña";
+    popupForm.reset();
+    opcion.style.display = "none";
+}
+
+// Función para mostrar el popup de comentario
+function mostrarComentarioPopup() {
+    const popup = document.getElementById("popup");
+    const popupTitle = document.getElementById("popup-title");
+    const popupForm = document.getElementById("popup-form");
+    const opcion = document.getElementById("opcion");
+    
+    popup.style.display = "block";
+    popupTitle.textContent = "Comentario";
+    popupForm.reset();
+    opcion.style.display = "block";
+}
+
+// Evento para abrir el popup de reseña
+document.querySelector(".fa-star").addEventListener("click", mostrarResenaPopup);
+
+// Evento para abrir el popup de comentario
+document.querySelector(".fa-comments").addEventListener("click", mostrarComentarioPopup);
+
+// Evento para cerrar el popup
+document.getElementById("close-button").addEventListener("click", function () {
+    document.getElementById("popup").style.display = "none";
+});
+
+// Evento para cambiar entre reseña y comentario
+document.getElementById("popup-title").addEventListener("click", function () {
+    if (this.textContent === "Reseña") {
+        mostrarComentarioPopup();
+    } else {
+        mostrarResenaPopup();
+    }
+});
+
+// Envío del formulario de reseña o comentario (puedes agregar la lógica aquí)
+document.getElementById("popup-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value;
+    const tel = document.getElementById("tel").value;
+    const comentario = document.getElementById("comentario").value;
+    const opcion = document.getElementById("opcion").value;
+    
+    if (document.getElementById("popup-title").textContent === "Reseña") {
+        // Lógica de envío de reseña
+        console.log("Enviando reseña:");
+        console.log("Nombre:", nombre);
+        console.log("Teléfono:", tel);
+        console.log("Comentario:", comentario);
+    } else {
+        // Lógica de envío de comentario
+        console.log("Enviando comentario:");
+        console.log("Opción:", opcion);
+        console.log("Comentario:", comentario);
+    }
+    
+    document.getElementById("popup").style.display = "none";
+});
+
 </script>
 
 </body>
