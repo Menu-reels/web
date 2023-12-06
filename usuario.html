@@ -390,6 +390,35 @@ iframe {
         mostrarDescripcion(); // Mostrar siempre la descripción completa
     });
 
+    // Detectar el desplazamiento táctil en la sección .carta
+    let touchStartY = null;
+
+    carta.addEventListener("touchstart", function (e) {
+        touchStartY = e.touches[0].clientY;
+    });
+
+    carta.addEventListener("touchmove", function (e) {
+        if (touchStartY === null) return;
+        const touchEndY = e.touches[0].clientY;
+        const deltaY = touchEndY - touchStartY;
+
+        if (deltaY > 20) {
+            // Deslizar hacia abajo, cambiar a la siguiente imagen y descripción
+            imagenIndex = (imagenIndex + 1) % imagenes.length;
+        } else if (deltaY < -20) {
+            // Deslizar hacia arriba, cambiar a la imagen y descripción anterior
+            imagenIndex = (imagenIndex - 1 + imagenes.length) % imagenes.length;
+        }
+
+        // Actualizar la imagen y la descripción del plato
+        imagenPlato.src = imagenes[imagenIndex];
+        nombreDelPlato.textContent = platos[imagenIndex].nombre;
+        precioPlato.textContent = platos[imagenIndex].precio;
+        mostrarDescripcion(); // Mostrar siempre la descripción completa
+
+        touchStartY = null;
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
       const categoriasContainer = document.querySelector(".categorias-container");
       const leftArrow = document.getElementById("left-arrow");
