@@ -248,6 +248,7 @@ iframe {
 
 .popup-content {
     background-color: #fff;
+    color: black;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
@@ -268,11 +269,17 @@ iframe {
 }
 
 /* Estilos del formulario de comentario */
-#opcion,
-#comentario {
+#opcion {
     display: none;
 }
 
+.submit-button, .comment-button {
+    font-size: 12px;
+    cursor: pointer;
+    background: red;
+    padding: 10px;
+    border-radius: 10px;
+}
 
 
     </style>
@@ -296,13 +303,15 @@ iframe {
         <span class="close-button" id="close-button">X</span>
         <h1 id="popup-title">Reseña</h1>
         <form id="popup-form">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required>
-            <label for="tel">Teléfono:</label>
-            <input type="tel" id="tel" required>
-            <label for="comentario">Comentario:</label>
-            <textarea id="comentario" required></textarea>
-            <button type="submit">Enviar Reseña</button>
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" required><br>
+            <label for="tel">Teléfono:</label><br>
+            <input type="tel" id="tel" required><br>
+            <label for="comentario">Comentario:</label><br>
+            <textarea id="comentario" required></textarea><br>
+             <button type="submit" class="submit-button">Enviar Reseña</button>
+            <button type="submit" class="comment-button" style="display: none;">Enviar Comentario</button>
+
         </form>
         <select id="opcion" style="display: none;">
             <option value="camarero">Camarero</option>
@@ -343,7 +352,7 @@ iframe {
 
     <div class="description-right">
         <i class="fa-solid fa-newspaper"><a href="#"></a></i>
-        <i class="fas fa-heart"></i>
+        <i class="fas fa-heart" id="heart-icon"></i>
         <i class="fa-brands fa-whatsapp"><a href="#"></i>
     </div>
 </div>
@@ -556,10 +565,10 @@ function mostrarComentarioPopup() {
     const popupForm = document.getElementById("popup-form");
     const opcion = document.getElementById("opcion");
     
-    popup.style.display = "block";
+    popup.style.display = "flex";
     popupTitle.textContent = "Comentario";
     popupForm.reset();
-    opcion.style.display = "block";
+    opcion.style.display = "flex";
 }
 
 // Evento para abrir el popup de reseña
@@ -605,6 +614,27 @@ document.getElementById("popup-form").addEventListener("submit", function (e) {
     
     document.getElementById("popup").style.display = "none";
 });
+
+
+const heartIcon = document.getElementById("heart-icon");
+
+// Variable para controlar el estado del corazón (inicialmente no está marcado)
+let isHeartRed = false;
+
+// Función para cambiar el color del corazón
+function toggleHeartColor() {
+    if (isHeartRed) {
+        heartIcon.style.color = "gray"; // Cambia a gris si estaba rojo
+    } else {
+        heartIcon.style.color = "red"; // Cambia a rojo si estaba gris
+    }
+    
+    isHeartRed = !isHeartRed; // Invierte el estado
+}
+
+// Agrega un evento de clic para llamar a la función
+heartIcon.addEventListener("click", toggleHeartColor);
+
 
 </script>
 
