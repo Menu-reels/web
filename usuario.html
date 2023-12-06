@@ -246,7 +246,7 @@ iframe {
     ></iframe>
     -->
 
- <div class="carta">
+ <div class="carta" id="carta">
 <img class="imagen-plato" src="comida10.gif" data-src="comida1.gif">
 <header>
     <div>
@@ -299,92 +299,94 @@ iframe {
 </div>
 
 <script>
-   const imagenes = ["comida1.gif", "comida2.gif", "comida3.gif", "comida4.gif", "comida5.gif", "comida6.gif", "comida7.gif", "comida8.gif"];
-        let imagenIndex = 0;
-    
-        // Elementos HTML para actualizar
-        const nombreDelPlato = document.querySelector(".description-left h2");
-        const precioPlato = document.querySelector(".description-left p.precio");
-        const descripcion = document.querySelector(".description-left p.descripcion");
-    
-        // Inicializar la imagen
-        const imagenPlato = document.querySelector(".imagen-plato");
-        imagenPlato.src = imagenes[imagenIndex];
-    
-        // Descripciones de los platos
-        const platos = [
-            {
-                nombre: "Ceviche",
-                precio: "16€",
-                descripcion: "El ceviche ecuatoriano se prepara principalmente con camarones o pescado, que se cocinan en jugo de limón y se mezclan con tomate, cebolla, cilantro y a veces, pimiento verde. Se sirve frío y es refrescante."
-            },
-            {
-                nombre: "Spaguetti",
-                precio: "12€",
-                descripcion: "Con queso mozzarella."
-            },
-            {
-                nombre: "Macarrones con Chorizo",
-                precio: "14€",
-                descripcion: "Chorizo de Burgos."
-            },
-            {
-                nombre: "Sopa de Sobre",
-                precio: "14€",
-                descripcion: "Descripción de la Sopa de Sobre."
-            },
-            {
-                nombre: "Bandera",
-                precio: "14€",
-                descripcion: "Descripción del Bandera."
-            },
-            {
-                nombre: "Colada Morada",
-                precio: "14€",
-                descripcion: "Descripción de la Colada Morada."
-            },
-            {
-                nombre: "Ensalada César",
-                precio: "14€",
-                descripcion: "Descripción de la Ensalada César."
-            },
-            {
-                nombre: "Calamares",
-                precio: "14€",
-                descripcion: "Descripción de los Calamares."
-            },
-            {
-                nombre: "Gazpacho",
-                precio: "14€",
-                descripcion: "Descripción del Gazpacho."
-            }
-        ];
-    
-        function mostrarDescripcion() {
-            const platoActual = platos[imagenIndex];
-            const descripcionTexto = platoActual.descripcion;
-            descripcion.textContent = descripcionTexto;
+    const imagenes = ["comida1.gif", "comida2.gif", "comida3.gif", "comida4.gif", "comida5.gif", "comida6.gif", "comida7.gif", "comida8.gif"];
+    let imagenIndex = 0;
+
+    // Elementos HTML para actualizar
+    const nombreDelPlato = document.querySelector(".description-left h2");
+    const precioPlato = document.querySelector(".description-left p.precio");
+    const descripcion = document.querySelector(".description-left p.descripcion");
+
+    // Inicializar la imagen
+    const imagenPlato = document.querySelector(".imagen-plato");
+    imagenPlato.src = imagenes[imagenIndex];
+
+    // Descripciones de los platos
+    const platos = [
+        {
+            nombre: "Ceviche",
+            precio: "16€",
+            descripcion: "El ceviche ecuatoriano se prepara principalmente con camarones o pescado, que se cocinan en jugo de limón y se mezclan con tomate, cebolla, cilantro y a veces, pimiento verde. Se sirve frío y es refrescante."
+        },
+        {
+            nombre: "Spaguetti",
+            precio: "12€",
+            descripcion: "Con queso mozzarella."
+        },
+        {
+            nombre: "Macarrones con Chorizo",
+            precio: "14€",
+            descripcion: "Chorizo de Burgos."
+        },
+        {
+            nombre: "Sopa de Sobre",
+            precio: "14€",
+            descripcion: "Descripción de la Sopa de Sobre."
+        },
+        {
+            nombre: "Bandera",
+            precio: "14€",
+            descripcion: "Descripción del Bandera."
+        },
+        {
+            nombre: "Colada Morada",
+            precio: "14€",
+            descripcion: "Descripción de la Colada Morada."
+        },
+        {
+            nombre: "Ensalada César",
+            precio: "14€",
+            descripcion: "Descripción de la Ensalada César."
+        },
+        {
+            nombre: "Calamares",
+            precio: "14€",
+            descripcion: "Descripción de los Calamares."
+        },
+        {
+            nombre: "Gazpacho",
+            precio: "14€",
+            descripcion: "Descripción del Gazpacho."
         }
-    
-        // Inicialmente, mostrar la descripción completa
-        mostrarDescripcion();
-    
-        // Detectar el desplazamiento de rueda (scroll) para cambiar la imagen
-        document.querySelector(".carta").addEventListener("scroll", function () {
-            // Obtener la posición vertical actual de desplazamiento dentro de .carta
-            const scrollTop = document.querySelector(".carta").scrollTop;
-    
-            // Calcular el índice en función de la posición de desplazamiento
-            const indice = Math.floor(scrollTop / (document.querySelector(".carta").scrollHeight / imagenes.length));
-    
-            // Asegurarse de que el índice esté dentro de los límites
-            imagenIndex = Math.min(Math.max(indice, 0), imagenes.length - 1);
-    
-            // Actualizar la imagen y la descripción del plato correspondientes
-            imagenPlato.src = imagenes[imagenIndex];
-            nombreDelPlato.textContent = platos[imagenIndex].nombre;
-            precioPlato.textContent = platos[imagenIndex].precio;
-        });
+    ];
+
+    function mostrarDescripcion() {
+        const platoActual = platos[imagenIndex];
+        const descripcionTexto = platoActual.descripcion;
+        descripcion.textContent = descripcionTexto;
+    }
+
+    // Inicialmente, mostrar la descripción completa
+    mostrarDescripcion();
+
+    // Detectar el desplazamiento de rueda (scroll) en la sección .carta
+    const carta = document.getElementById("carta");
+
+    carta.addEventListener("wheel", function (e) {
+        if (e.deltaY > 0) {
+            // Deslizar hacia abajo, cambiar a la siguiente imagen y descripción
+            imagenIndex = (imagenIndex + 1) % imagenes.length;
+        } else {
+            // Deslizar hacia arriba, cambiar a la imagen y descripción anterior
+            imagenIndex = (imagenIndex - 1 + imagenes.length) % imagenes.length;
+        }
+
+        // Actualizar la imagen y la descripción del plato
+        imagenPlato.src = imagenes[imagenIndex];
+        nombreDelPlato.textContent = platos[imagenIndex].nombre;
+        precioPlato.textContent = platos[imagenIndex].precio;
+        mostrarDescripcion(); // Mostrar siempre la descripción completa
+    });
 
     document.addEventListener("DOMContentLoaded", function () {
       const categoriasContainer = document.querySelector(".categorias-container");
