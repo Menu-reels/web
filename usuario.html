@@ -222,6 +222,11 @@ iframe {
             max-width: 500px;
             margin: 0 auto;
             overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: initial;
+    flex-direction: column;
+    height: 100vh;
         }
 
     .imagen-plato{
@@ -273,7 +278,11 @@ iframe {
     display: none;
 }
 
-/* Otros estilos según tu preferencia */
+.box-reel{
+    display: flex;
+        justify-content: center;
+        align-items: space-between;
+}
 
     </style>
 </head>
@@ -327,7 +336,8 @@ iframe {
         <i class="fa-solid fa-comments"></i>
     </div>
 </header>
-<div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
+<div class="box-reel">
+    <div id="middle-div"></div> <!-- Este div ocupará el 40% del viewport height -->
 <div class="product-description">
    <div class="description-left">
         <div class="restaurante">
@@ -345,6 +355,7 @@ iframe {
         <i class="fas fa-heart"></i>
         <i class="fa-brands fa-whatsapp"><a href="#"></i>
     </div>
+</div>
 </div>
 
 <div class="categorias">
