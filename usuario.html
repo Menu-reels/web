@@ -294,147 +294,56 @@ iframe {
 </div>
 
 <script>
-const videos = ["comida.mp4", "comida2.mp4", "comida3.mp4", "comida4.mp4", "comida5.mp4", "comida6.mp4", "comida7.mp4", "comida8.mp4"];
-        let videoIndex = 0;
-    
-        // Elementos HTML para actualizar
-        const nombreDelPlato = document.querySelector(".description-left h2");
-        const precioPlato = document.querySelector(".description-left p.precio");
-        const descripcion = document.querySelector(".description-left p.descripcion");
-    
-        // Inicializar el video
-        const video = document.getElementById("background-video");
-        video.src = videos[videoIndex];
-        video.load();
-        video.play();
-    
-        // Descripciones de los platos
-        const platos = [
+ const textos = [
             {
-                nombre: "Ceviche",
-                precio: "16€",
-                descripcion: "El ceviche ecuatoriano se prepara principalmente con camarones o pescado, que se cocinan en jugo de limón y se mezclan con tomate, cebolla, cilantro y a veces, pimiento verde. Se sirve frío y es refrescante."
+                titulo: "Plato 1",
+                descripcion: "Descripción del Plato 1"
             },
             {
-                nombre: "Spaguetti",
-                precio: "12€",
-                descripcion: "Con queso mozzarella."
+                titulo: "Plato 2",
+                descripcion: "Descripción del Plato 2"
             },
             {
-                nombre: "Macarrones con Chorizo",
-                precio: "14€",
-                descripcion: "Chorizo de Burgos."
+                titulo: "Plato 3",
+                descripcion: "Descripción del Plato 3"
             },
-            {
-                nombre: "Sopa de Sobre",
-                precio: "14€",
-                descripcion: "Descripción de la Sopa de Sobre."
-            },
-            {
-                nombre: "Bandera",
-                precio: "14€",
-                descripcion: "Descripción del Bandera."
-            },
-            {
-                nombre: "Colada Morada",
-                precio: "14€",
-                descripcion: "Descripción de la Colada Morada."
-            },
-            {
-                nombre: "Ensalada César",
-                precio: "14€",
-                descripcion: "Descripción de la Ensalada César."
-            },
-            {
-                nombre: "Calamares",
-                precio: "14€",
-                descripcion: "Descripción de los Calamares."
-            },
-            {
-                nombre: "Gazpacho",
-                precio: "14€",
-                descripcion: "Descripción del Gazpacho."
-            }
+            // Agrega más elementos según sea necesario
         ];
-    
-        function mostrarDescripcion() {
-            const platoActual = platos[videoIndex];
-            const descripcionTexto = platoActual.descripcion;
-            descripcion.textContent = descripcionTexto;
+
+        const imagenes = [
+            "comida1.gif",
+            "comida2.gif",
+            "comida3.gif",
+            "comida4.gif",
+            "comida5.gif",
+            "comida6.gif",
+            "comida7.gif",
+            // Agrega más imágenes según sea necesario
+        ];
+
+        function cambiarContenidoAlHacerScroll() {
+            // Obtener la posición vertical actual de desplazamiento
+            const scrollTop = window.scrollY;
+
+            // Calcular el índice en función de la posición de desplazamiento
+            const indice = Math.floor(scrollTop / (window.innerHeight / textos.length));
+
+            // Asegurarse de que el índice esté dentro de los límites
+            const indiceValido = Math.min(Math.max(indice, 0), textos.length - 1);
+
+            // Actualizar el texto y la imagen correspondientes
+            const titulo = document.querySelector(".description-left h2");
+            const descripcion = document.querySelector(".description-left p.descripcion");
+            const imagenPlato = document.querySelector(".imagen-plato");
+
+            titulo.textContent = textos[indiceValido].titulo;
+            descripcion.textContent = textos[indiceValido].descripcion;
+            imagenPlato.src = imagenes[indiceValido];
         }
-    
-        // Inicialmente, mostrar la descripción completa
-        mostrarDescripcion();
-    
-        // Detectar el desplazamiento de rueda (scroll) para cambiar el video
-        window.addEventListener("wheel", function (e) {
-            if (e.deltaY > 0) {
-                // Deslizar hacia abajo, cambiar al siguiente video
-                videoIndex = (videoIndex + 1) % videos.length;
-            } else {
-                // Deslizar hacia arriba, cambiar al video anterior
-                videoIndex = (videoIndex - 1 + videos.length) % videos.length;
-            }
-    
-            // Cambiar el video
-            video.src = videos[videoIndex];
-            video.load();
-            video.play();
-    
-            // Cambiar la descripción del plato
-            const platoActual = platos[videoIndex];
-            nombreDelPlato.textContent = platoActual.nombre;
-            precioPlato.textContent = platoActual.precio;
-            mostrarDescripcion(); // Mostrar siempre la descripción completa
-        });
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const platoElements = document.querySelectorAll(".plato");
-
-            // Función para mostrar el texto completo
-            function mostrarTextoCompleto(index) {
-                platoElements[index].querySelector(".descripcion").classList.add("expandido");
-                platoElements[index].querySelector(".VerMenos").style.display = "inline";
-                platoElements[index].querySelector(".VerMas").style.display = "none";
-            }
-
-            // Función para mostrar el texto recortado
-            function mostrarTextoRecortado(index) {
-                platoElements[index].querySelector(".descripcion").classList.remove("expandido");
-                platoElements[index].querySelector(".VerMenos").style.display = "none";
-                platoElements[index].querySelector(".VerMas").style.display = "inline";
-            }
-
-            // Agregar el evento click para "Ver Más" y "Ver Menos" para cada plato
-            platoElements.forEach((plato, index) => {
-                const verMas = plato.querySelector(".VerMas");
-                const verMenos = plato.querySelector(".VerMenos");
-
-                verMas.addEventListener("click", () => mostrarTextoCompleto(index));
-                verMenos.addEventListener("click", () => mostrarTextoRecortado(index));
-            });
-
-            // Verificar el estado inicial para cada plato
-            platoElements.forEach((plato, index) => {
-                const descripcion = plato.querySelector(".descripcion");
-                const textoCompleto = platos[index].descripcion;
-                const longitudMaxima = 144;
-
-                if (textoCompleto.length > longitudMaxima) {
-                    const textoRecortado = textoCompleto.slice(0, longitudMaxima) + "...";
-                    descripcion.textContent = textoRecortado;
-                    mostrarTextoRecortado(index);
-                }
-            });
-        });
+        window.addEventListener("scroll", cambiarContenidoAlHacerScroll);
 
 
-
-    // Función para reproducir el video en dispositivos móviles
-    function playVideo() {
-        video.play();
-        document.querySelector(".play-button").style.display = "none";
-    }
 
 
     document.addEventListener("DOMContentLoaded", function () {
