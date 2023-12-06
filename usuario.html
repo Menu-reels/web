@@ -324,12 +324,14 @@ iframe {
             // Agrega más imágenes según sea necesario
         ];
 
+        const carta = document.querySelector(".carta");
+
         function cambiarContenidoAlHacerScroll() {
-            // Obtener la posición vertical actual de desplazamiento
-            const scrollTop = window.scrollY;
+            // Obtener la posición vertical actual de desplazamiento dentro de .carta
+            const scrollTop = carta.scrollTop;
 
             // Calcular el índice en función de la posición de desplazamiento
-            const indice = Math.floor(scrollTop / (window.innerHeight / textos.length));
+            const indice = Math.floor(scrollTop / (carta.scrollHeight / textos.length));
 
             // Asegurarse de que el índice esté dentro de los límites
             const indiceValido = Math.min(Math.max(indice, 0), textos.length - 1);
@@ -344,8 +346,8 @@ iframe {
             imagenPlato.src = imagenes[indiceValido];
         }
 
-        window.addEventListener("scroll", cambiarContenidoAlHacerScroll);
-
+        // Agregar un evento de desplazamiento (scroll) específico para .carta
+        carta.addEventListener("scroll", cambiarContenidoAlHacerScroll);
 
 
 
