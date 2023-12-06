@@ -297,59 +297,92 @@ iframe {
 </div>
 
 <script>
- const textos = [
+   const imagenes = ["comida1.gif", "comida2.gif", "comida3.gif", "comida4.gif", "comida5.gif", "comida6.gif", "comida7.gif", "comida8.gif"];
+        let imagenIndex = 0;
+    
+        // Elementos HTML para actualizar
+        const nombreDelPlato = document.querySelector(".description-left h2");
+        const precioPlato = document.querySelector(".description-left p.precio");
+        const descripcion = document.querySelector(".description-left p.descripcion");
+    
+        // Inicializar la imagen
+        const imagenPlato = document.querySelector(".imagen-plato");
+        imagenPlato.src = imagenes[imagenIndex];
+    
+        // Descripciones de los platos
+        const platos = [
             {
-                titulo: "Plato 1",
-                descripcion: "Descripción del Plato 1"
+                nombre: "Ceviche",
+                precio: "16€",
+                descripcion: "El ceviche ecuatoriano se prepara principalmente con camarones o pescado, que se cocinan en jugo de limón y se mezclan con tomate, cebolla, cilantro y a veces, pimiento verde. Se sirve frío y es refrescante."
             },
             {
-                titulo: "Plato 2",
-                descripcion: "Descripción del Plato 2"
+                nombre: "Spaguetti",
+                precio: "12€",
+                descripcion: "Con queso mozzarella."
             },
             {
-                titulo: "Plato 3",
-                descripcion: "Descripción del Plato 3"
+                nombre: "Macarrones con Chorizo",
+                precio: "14€",
+                descripcion: "Chorizo de Burgos."
             },
-            // Agrega más elementos según sea necesario
+            {
+                nombre: "Sopa de Sobre",
+                precio: "14€",
+                descripcion: "Descripción de la Sopa de Sobre."
+            },
+            {
+                nombre: "Bandera",
+                precio: "14€",
+                descripcion: "Descripción del Bandera."
+            },
+            {
+                nombre: "Colada Morada",
+                precio: "14€",
+                descripcion: "Descripción de la Colada Morada."
+            },
+            {
+                nombre: "Ensalada César",
+                precio: "14€",
+                descripcion: "Descripción de la Ensalada César."
+            },
+            {
+                nombre: "Calamares",
+                precio: "14€",
+                descripcion: "Descripción de los Calamares."
+            },
+            {
+                nombre: "Gazpacho",
+                precio: "14€",
+                descripcion: "Descripción del Gazpacho."
+            }
         ];
-
-        const imagenes = [
-            "comida1.gif",
-            "comida2.gif",
-            "comida3.gif",
-            "comida4.gif",
-            "comida5.gif",
-            "comida6.gif",
-            "comida7.gif",
-            // Agrega más imágenes según sea necesario
-        ];
-
-        const carta = document.querySelector(".carta");
-
-        function cambiarContenidoAlHacerScroll() {
-            // Obtener la posición vertical actual de desplazamiento dentro de .carta
-            const scrollTop = carta.scrollTop;
-
-            // Calcular el índice en función de la posición de desplazamiento
-            const indice = Math.floor(scrollTop / (carta.scrollHeight / textos.length));
-
-            // Asegurarse de que el índice esté dentro de los límites
-            const indiceValido = Math.min(Math.max(indice, 0), textos.length - 1);
-
-            // Actualizar el texto y la imagen correspondientes
-            const titulo = document.querySelector(".description-left h2");
-            const descripcion = document.querySelector(".description-left p.descripcion");
-            const imagenPlato = document.querySelector(".imagen-plato");
-
-            titulo.textContent = textos[indiceValido].titulo;
-            descripcion.textContent = textos[indiceValido].descripcion;
-            imagenPlato.src = imagenes[indiceValido];
+    
+        function mostrarDescripcion() {
+            const platoActual = platos[imagenIndex];
+            const descripcionTexto = platoActual.descripcion;
+            descripcion.textContent = descripcionTexto;
         }
-
-        // Agregar un evento de desplazamiento (scroll) específico para .carta
-        carta.addEventListener("scroll", cambiarContenidoAlHacerScroll);
-
-
+    
+        // Inicialmente, mostrar la descripción completa
+        mostrarDescripcion();
+    
+        // Detectar el desplazamiento de rueda (scroll) para cambiar la imagen
+        document.querySelector(".carta").addEventListener("scroll", function () {
+            // Obtener la posición vertical actual de desplazamiento dentro de .carta
+            const scrollTop = document.querySelector(".carta").scrollTop;
+    
+            // Calcular el índice en función de la posición de desplazamiento
+            const indice = Math.floor(scrollTop / (document.querySelector(".carta").scrollHeight / imagenes.length));
+    
+            // Asegurarse de que el índice esté dentro de los límites
+            imagenIndex = Math.min(Math.max(indice, 0), imagenes.length - 1);
+    
+            // Actualizar la imagen y la descripción del plato correspondientes
+            imagenPlato.src = imagenes[imagenIndex];
+            nombreDelPlato.textContent = platos[imagenIndex].nombre;
+            precioPlato.textContent = platos[imagenIndex].precio;
+        });
 
     document.addEventListener("DOMContentLoaded", function () {
       const categoriasContainer = document.querySelector(".categorias-container");
