@@ -50,7 +50,6 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            height: 25vh;
             position: relative;
             margin-bottom: 0;
             padding: 20px;
@@ -87,8 +86,9 @@
 
         .description-left p.precio {
             font-size: 25px;
-            color: #ff0000;
-            margin: 0;
+    color: #ff0000;
+    margin: 0;
+    font-family: monospace;
         }
 
         .description-left p.descripcion {
@@ -98,8 +98,10 @@
 
         .description-left span.VerMas {
             font-size: 12px;
-            color: #0077cc; /* Color del enlace Ver Más */
-            cursor: pointer;
+    cursor: pointer;
+    background: red;
+    padding: 10px;
+    border-radius: 10px;
         }
 
  .description-left span.VerMenos {
@@ -152,14 +154,15 @@
 
 /* Estilo para la sección de categorías */
 .categorias {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-    height: 100px;
+      width: 100%;
+    overflow: hidden;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
     background: black;
+    bottom: 0;
 }
 
 /* Contenedor de las imágenes */
@@ -289,6 +292,11 @@ iframe {
     </div>
     <div class="categorias-container">
       <img src="imagen1.png" alt="Imagen 1" class="categoria-imagen">
+      <img src="imagen2.png" alt="Imagen 2" class="categoria-imagen">
+      <img src="imagen3.png" alt="Imagen 3" class="categoria-imagen">
+      <img src="imagen4.png" alt="Imagen 4" class="categoria-imagen">
+      <img src="imagen5.png" alt="Imagen 5" class="categoria-imagen">
+ <img src="imagen1.png" alt="Imagen 1" class="categoria-imagen">
       <img src="imagen2.png" alt="Imagen 2" class="categoria-imagen">
       <img src="imagen3.png" alt="Imagen 3" class="categoria-imagen">
       <img src="imagen4.png" alt="Imagen 4" class="categoria-imagen">
