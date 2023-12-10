@@ -54,6 +54,7 @@
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         img {
@@ -69,12 +70,25 @@
 
         /* Estilos para los iconos de lápiz */
         .edit-icon {
-            float: right;
-            margin-left: 5px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
             color: #ccc;
+            cursor: pointer;
         }
 
-/* Estilos para el pop-up */
+        /* Estilos para el botón "Añadir sección" */
+        #addSectionButton {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos para el pop-up */
         .popup {
             display: none;
             position: fixed;
@@ -114,30 +128,24 @@
 
     <!-- Sección de items -->
     <div class="items">
-        <div class="item" data-reel="1">
+        <!-- Elementos existentes -->
+        <div class="item" data-index="1">
             <img src="imagen1.jpg" alt="Plato 1">
             <div class="info-item">
-                <span class="edit-icon"><i class="fas fa-pencil-alt"></i></span>
+                <span class="edit-icon" onclick="mostrarPopup(1)"><i class="fas fa-pencil-alt"></i></span>
                 <h3>Nombre del Plato 1</h3>
                 <p>Precio: $10.99</p>
                 <p>Descripción del Plato 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
 
-        <div class="item">
-            <img src="imagen2.jpg" alt="Plato 2">
-            <div class="info-item">
-                <span class="edit-icon"><i class="fas fa-pencil-alt"></i></span>
-                <h3>Nombre del Plato 2</h3>
-                <p>Precio: $12.99</p>
-                <p>Descripción del Plato 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-        </div>
-
-        <!-- Agrega más items según sea necesario -->
-
+        <!-- Nuevo elemento que se agregará dinámicamente -->
     </div>
- <!-- Popup para la edición -->
+
+    <!-- Botón "Añadir sección" -->
+    <button id="addSectionButton" onclick="agregarSeccion()">Añadir sección</button>
+
+    <!-- Popup para la edición -->
     <div class="popup" id="editPopup">
         <div class="popup-content">
             <span class="close-icon" onclick="cerrarPopup()"><i class="fas fa-times"></i></span>
@@ -151,13 +159,11 @@
             <button onclick="guardarCambios()">Guardar Cambios</button>
         </div>
     </div>
-  <!-- Botón "Añadir sección" -->
-    <button id="addSectionButton" onclick="agregarSeccion()">Añadir sección</button>
-<script>
 
-// Función para mostrar el popup de edición
-        function mostrarPopup(id) {
-            var item = document.querySelectorAll('.item')[id - 1];
+    <script>
+        // Función para mostrar el popup de edición
+        function mostrarPopup(index) {
+            var item = document.querySelectorAll('.item')[index - 1];
             var nombre = item.querySelector('h3').innerText;
             var precio = item.querySelector('p:nth-child(2)').innerText.split(': ')[1];
             var descripcion = item.querySelector('p:nth-child(3)').innerText;
@@ -181,7 +187,7 @@
             var descripcionEditada = document.getElementById('editDescripcion').value;
 
             // Actualizar los valores en el item
-            var item = document.querySelector('.item');
+            var item = document.querySelector('.item[data-index="1"]');
             item.querySelector('h3').innerText = nombreEditado;
             item.querySelector('p:nth-child(2)').innerText = 'Precio: ' + precioEditado;
             item.querySelector('p:nth-child(3)').innerText = descripcionEditada;
@@ -189,12 +195,14 @@
             // Cerrar el popup
             cerrarPopup();
         }
-    
+
         // Función para agregar una nueva sección
         function agregarSeccion() {
             // Crear un nuevo nodo
             var nuevoItem = document.createElement('div');
             nuevoItem.className = 'item';
+            var index = document.querySelectorAll('.item').length + 1;
+            nuevoItem.setAttribute('data-index', index);
 
             var nuevoImg = document.createElement('img');
             nuevoImg.src = 'nueva_imagen.jpg';
@@ -207,6 +215,9 @@
             var editIcon = document.createElement('span');
             editIcon.className = 'edit-icon';
             editIcon.innerHTML = '<i class="fas fa-pencil-alt"></i>';
+            editIcon.onclick = function () {
+                mostrarPopup(index);
+            };
             nuevaInfoItem.appendChild(editIcon);
 
             var nuevoH3 = document.createElement('h3');
@@ -228,5 +239,6 @@
             contenedorItems.appendChild(nuevoItem);
         }
     </script>
+
 </body>
 </html>
