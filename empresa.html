@@ -11,88 +11,90 @@
 
     <title>Menu Reels</title>
     <style>
-    body {
-    text-align: center;
-    background-color: #f0f0f0;
-    font-family: 'Raleway';
-    margin: 0;
-    overflow: hidden;
-    position: relative;
-    color: white;
-    transition: background 0.5s ease;
-    background: black;
-}
+        body {
+            text-align: center;
+            background-color: #f0f0f0;
+            font-family: 'Raleway';
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            color: white;
+            transition: background 0.5s ease;
+            background: black;
+        }
 
-header {
-    padding: 20px;
-    background-color: #333;
-    color: white;
-}
+        header {
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
 
-h1 {
-    margin-bottom: 10px;
-}
+        h1 {
+            margin-bottom: 10px;
+        }
 
-span {
-    display: block;
-    font-style: italic;
-}
+        span {
+            display: block;
+            font-style: italic;
+        }
 
-.reels {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
+        .reels {
+            display: flex;
+            overflow-x: auto;  /* Permitir desplazamiento horizontal */
+            padding: 20px;
+        }
 
-.item-container {
-    width: 50%;
-}
+        .item-container {
+            width: 50%;
+            flex-shrink: 0;  /* Evitar que los elementos se reduzcan en tamaño */
+        }
 
-.item {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    position: relative;
-}
+        .item {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            position: relative;
+        }
 
-.item-image {
-    max-width: 100%;
-    height: auto;
-}
+        .item-image {
+            max-width: 100%;
+            height: auto;
+        }
 
+        .edit-icon {
+            cursor: pointer;
+            color: white;
+        }
 
+        .edicion-h1,
+        .edicion-precio,
+        .edicion-descripcion {
+            width: 100%;
+            margin: 5px 0;
+        }
 
-.edit-icon {
-    cursor: pointer;
-    color: white;
-}
+        .edicion-descripcion {
+            height: 100px; /* Altura del textarea */
+        }
 
-.edicion-h1,
-.edicion-precio,
-.edicion-descripcion {
-    width: 100%;
-    margin: 5px 0;
-}
+        .editor {
+            display: flex;
+            width: 100%;
+        }
 
-.editor {
-    display: flex;
-    width: 100%;
-}
+        .editor div {
+            width: 50%;
+            padding: 20px;
+        }
 
-.editor div {
-    width: 50%;
-    padding: 20px;
-}
+        .vistaprevia {
+            display: flex;
+        }
 
-.vistaprevia {
-    display: flex;
-}
-
-.vistaprevia div {
-    width: 50%;
-    padding: 20px;
-}
-
+        .vistaprevia div {
+            width: 50%;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -105,7 +107,7 @@ span {
 <section class="reels">
     <div class="item-container">
         <div class="item" data-index="1">
-             <video class="item-video" controls>
+            <video class="item-video" controls>
                 <source src="video-ejemplo.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
@@ -116,6 +118,22 @@ span {
             </div>
         </div>
     </div>
+
+    <!-- Agrega más .item-container con información inventada -->
+    <div class="item-container">
+        <div class="item" data-index="2">
+            <!-- Contenido inventado -->
+            <img class="item-image" src="imagen-2.jpg" alt="Plato 2">
+            <div class="info-item">
+                <h3 class="item-title">Plato 2</h3>
+                <p class="item-price">Precio: $10.99</p>
+                <p class="item-description">Descripción del Plato 2</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Repite el patrón para más elementos -->
+
 </section>
 
 <section class="editor">
@@ -125,7 +143,7 @@ span {
         <p>Precio</p>
         <input type="text" class="edicion-precio">
         <p>Descripción</p>
-         <textarea class="edicion-descripcion"></textarea>
+        <textarea class="edicion-descripcion"></textarea>
         <button>Guardar</button>
     </div>
 
