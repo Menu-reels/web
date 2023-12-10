@@ -11,244 +11,134 @@
 
     <title>Menu Reels</title>
     <style>
-        /* Estilo para el contenedor principal */
-        body {
-            text-align: center;
-            background-color: #f0f0f0;
-            font-family: 'Raleway';
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-            color: white;
-            transition: background 0.5s ease;
-            background: black;
-        }
+    body {
+    text-align: center;
+    background-color: #f0f0f0;
+    font-family: 'Raleway';
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    transition: background 0.5s ease;
+    background: black;
+}
 
-        /* Estilos para el encabezado */
-        header {
-            padding: 20px;
-            background-color: #333;
-            color: white;
-        }
+header {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
 
-        h1 {
-            margin-bottom: 10px;
-        }
+h1 {
+    margin-bottom: 10px;
+}
 
-        span {
-            display: block;
-            font-style: italic;
-        }
+span {
+    display: block;
+    font-style: italic;
+}
 
-        /* Estilos para la sección de items */
-        .items {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
+.reels {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
 
-        .item {
-            width: 300px;
-            margin: 10px;
-            background-color: #555;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
+.item-container {
+    width: 50%;
+}
 
-        img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
+.item {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+}
 
-        .info-item {
-            text-align: left;
-            color: white;
-        }
+.item-image {
+    max-width: 100%;
+    height: auto;
+}
 
-        /* Estilos para los iconos de lápiz */
-        .edit-icon {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            color: #ccc;
-            cursor: pointer;
-        }
+.info-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+}
 
-        /* Estilos para el botón "Añadir sección" */
-        #addSectionButton {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+.edit-icon {
+    cursor: pointer;
+    color: white;
+}
 
-        /* Estilos para el pop-up */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+.edicion-h1,
+.edicion-precio,
+.edicion-descripcion {
+    width: 100%;
+    margin: 5px 0;
+}
 
-        .popup-content {
-            background: #333;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
+.editor {
+    display: flex;
+    width: 100%;
+}
 
-        .close-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #ccc;
-            cursor: pointer;
-        }
+.editor div {
+    width: 50%;
+    padding: 20px;
+}
+
+.vistaprevia {
+    display: flex;
+}
+
+.vistaprevia div {
+    width: 50%;
+    padding: 20px;
+}
+
     </style>
 </head>
 <body>
 
-    <!-- Encabezado -->
-    <header>
-        <h1>Crea Tu Menu Reels</h1>
-        <span>Añade los vídeos de calidad para representar la experiencia de tus platos.</span>
-    </header>
+<header>
+    <h1>Crea Tu Menu Reels</h1>
+    <span>Añade los vídeos de calidad para representar la experiencia de tus platos.</span>
+</header>
 
-    <!-- Sección de items -->
-    <div class="items">
-      <div class="item-container">
+<section class="reels">
+    <div class="item-container">
         <div class="item" data-index="1">
             <img class="item-image" src="nueva_imagen.jpg" alt="Nuevo Plato">
             <div class="info-item">
-                <span class="edit-icon" onclick="openPopup()"><i class="fas fa-pencil-alt"></i></span>
+                <span class="edit-icon"><i class="fas fa-pencil-alt"></i></span>
                 <h3 class="item-title">Nuevo Plato</h3>
                 <p class="item-price">Precio: $0.00</p>
                 <p class="item-description">Descripción del Nuevo Plato</p>
             </div>
         </div>
     </div>
+</section>
+
+<section class="editor">
+    <div>
+        <p>Nombre Principal</p>
+        <input type="text" class="edicion-h1">
+        <p>Precio</p>
+        <input type="text" class="edicion-precio">
+        <p>Descripción</p>
+        <input type="text" class="edicion-descripcion">
+        <button>Guardar</button>
     </div>
 
-    <!-- Botón "Añadir sección" -->
-    <button id="addSectionButton" onclick="agregarSeccion()">Añadir sección</button>
-
-    <!-- Popup para la edición -->
-    <div class="popup" id="editPopup">
-        <div class="popup-content">
-            <span class="close-icon" onclick="cerrarPopup()"><i class="fas fa-times"></i></span>
-            <h3>Editar Plato</h3>
-            <label for="editNombre">Nombre del Plato:</label>
-            <input type="text" id="editNombre">
-            <label for="editPrecio">Precio:</label>
-            <input type="text" id="editPrecio">
-            <label for="editDescripcion">Descripción:</label>
-            <input type="text" id="editDescripcion">
-            <button onclick="guardarCambios()">Guardar Cambios</button>
-        </div>
+    <div class="vistaprevia">
+        <div>Vista Previa 1</div>
+        <div>Vista Previa 2</div>
     </div>
-
-    <script>
-       function openPopup(index) {
-        // Obtener referencias a los elementos del DOM
-        var popup = document.getElementById('editPopup');
-        var titleInput = document.getElementById('editNombre');
-        var priceInput = document.getElementById('editPrecio');
-        var descriptionInput = document.getElementById('editDescripcion');
-
-        // Obtener la información del elemento seleccionado
-        var selectedItem = document.querySelector('.item[data-index="' + index + '"]');
-        var title = selectedItem.querySelector('.item-title').innerText;
-        var price = selectedItem.querySelector('.item-price').innerText.replace('Precio: ', '');
-        var description = selectedItem.querySelector('.item-description').innerText;
-
-        // Llenar los campos del formulario con la información actual
-        titleInput.value = title;
-        priceInput.value = price;
-        descriptionInput.value = description;
-
-        // Mostrar el popup
-        popup.style.display = 'flex';
-    }
-
-    function cerrarPopup() {
-        // Cerrar el popup
-        var popup = document.getElementById('editPopup');
-        popup.style.display = 'none';
-    }
-
-    function guardarCambios() {
-        // Obtener la información del formulario
-        var titleInput = document.getElementById('editNombre');
-        var priceInput = document.getElementById('editPrecio');
-        var descriptionInput = document.getElementById('editDescripcion');
-
-        var title = titleInput.value;
-        var price = priceInput.value;
-        var description = descriptionInput.value;
-
-        // Guardar la información en el Local Storage (puedes adaptar esto según tus necesidades)
-        localStorage.setItem('editedItemTitle', title);
-        localStorage.setItem('editedItemPrice', price);
-        localStorage.setItem('editedItemDescription', description);
-
-        // Cerrar el popup
-        cerrarPopup();
-    }
-
-        // Función para agregar una nueva sección
-        function agregarSeccion() {
-            // Crear un nuevo nodo
-            var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'item';
-
-            var nuevoImg = document.createElement('img');
-            nuevoImg.src = 'nueva_imagen.jpg';
-            nuevoImg.alt = 'Nuevo Plato';
-            nuevoItem.appendChild(nuevoImg);
-
-            var nuevaInfoItem = document.createElement('div');
-            nuevaInfoItem.className = 'info-item';
-
-            var editIcon = document.createElement('span');
-            editIcon.className = 'edit-icon';
-            editIcon.innerHTML = '<i class="fas fa-pencil-alt"></i>';
-            editIcon.onclick = function () {
-                mostrarPopup(editIcon);
-            };
-            nuevaInfoItem.appendChild(editIcon);
-
-            var nuevoH3 = document.createElement('h3');
-            nuevoH3.innerHTML = 'Nuevo Plato';
-            nuevaInfoItem.appendChild(nuevoH3);
-
-            var nuevoPrecio = document.createElement('p');
-            nuevoPrecio.innerHTML = 'Precio: $0.00';
-            nuevaInfoItem.appendChild(nuevoPrecio);
-
-            var nuevaDescripcion = document.createElement('p');
-            nuevaDescripcion.innerHTML = 'Descripción del Nuevo Plato';
-            nuevaInfoItem.appendChild(nuevaDescripcion);
-
-            nuevoItem.appendChild(nuevaInfoItem);
-
-            // Agregar el nuevo nodo al contenedor de items
-            var contenedorItems = document.querySelector('.items');
-            contenedorItems.appendChild(nuevoItem);
-        }
-    </script>
+</section>
 
 </body>
 </html>
