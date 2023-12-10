@@ -129,18 +129,17 @@
 
     <!-- Sección de items -->
     <div class="items">
-        <!-- Elementos existentes -->
-        <div class="item">
-            <img src="imagen1.jpg" alt="Plato 1">
+      <div class="item-container">
+        <div class="item" data-index="1">
+            <img class="item-image" src="nueva_imagen.jpg" alt="Nuevo Plato">
             <div class="info-item">
-                <span class="edit-icon" onclick="mostrarPopup(this)"><i class="fas fa-pencil-alt"></i></span>
-                <h3>Nombre del Plato 1</h3>
-                <p>Precio: $10.99</p>
-                <p>Descripción del Plato 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <span class="edit-icon" onclick="openPopup()"><i class="fas fa-pencil-alt"></i></span>
+                <h3 class="item-title">Nuevo Plato</h3>
+                <p class="item-price">Precio: $0.00</p>
+                <p class="item-description">Descripción del Nuevo Plato</p>
             </div>
         </div>
-
-        <!-- Nuevo elemento que se agregará dinámicamente -->
+    </div>
     </div>
 
     <!-- Botón "Añadir sección" -->
@@ -162,64 +161,52 @@
     </div>
 
     <script>
-        // Función para mostrar el popup de edición
-        function mostrarPopup(icon) {
-            var item = icon.closest('.item');
-            if (item) {
-                var nombreElement = item.querySelector('h3');
-                var precioElement = item.querySelector('p:nth-child(2)');
-                var descripcionElement = item.querySelector('p:nth-child(3)');
+       function openPopup(index) {
+        // Obtener referencias a los elementos del DOM
+        var popup = document.getElementById('editPopup');
+        var titleInput = document.getElementById('editNombre');
+        var priceInput = document.getElementById('editPrecio');
+        var descriptionInput = document.getElementById('editDescripcion');
 
-                if (nombreElement && precioElement && descripcionElement) {
-                    var nombre = nombreElement.innerText;
-                    var precio = precioElement.innerText.split(': ')[1];
-                    var descripcion = descripcionElement.innerText;
+        // Obtener la información del elemento seleccionado
+        var selectedItem = document.querySelector('.item[data-index="' + index + '"]');
+        var title = selectedItem.querySelector('.item-title').innerText;
+        var price = selectedItem.querySelector('.item-price').innerText.replace('Precio: ', '');
+        var description = selectedItem.querySelector('.item-description').innerText;
 
-                    document.getElementById('editNombre').value = nombre;
-                    document.getElementById('editPrecio').value = precio;
-                    document.getElementById('editDescripcion').value = descripcion;
+        // Llenar los campos del formulario con la información actual
+        titleInput.value = title;
+        priceInput.value = price;
+        descriptionInput.value = description;
 
-                    document.getElementById('editPopup').style.display = 'flex';
-                } else {
-                    console.error('Elementos internos no encontrados en el elemento .item');
-                }
-            } else {
-                console.error('Elemento .item no encontrado');
-            }
-        }
+        // Mostrar el popup
+        popup.style.display = 'flex';
+    }
 
-        // Función para cerrar el popup
-        function cerrarPopup() {
-            document.getElementById('editPopup').style.display = 'none';
-        }
+    function cerrarPopup() {
+        // Cerrar el popup
+        var popup = document.getElementById('editPopup');
+        popup.style.display = 'none';
+    }
 
-        // Función para guardar los cambios
-        function guardarCambios() {
-            var nombreEditado = document.getElementById('editNombre').value;
-            var precioEditado = document.getElementById('editPrecio').value;
-            var descripcionEditada = document.getElementById('editDescripcion').value;
+    function guardarCambios() {
+        // Obtener la información del formulario
+        var titleInput = document.getElementById('editNombre');
+        var priceInput = document.getElementById('editPrecio');
+        var descriptionInput = document.getElementById('editDescripcion');
 
-            // Actualizar los valores en el item
-            var item = document.querySelector('.item');
-            if (item) {
-                var nombreElement = item.querySelector('h3');
-                var precioElement = item.querySelector('p:nth-child(2)');
-                var descripcionElement = item.querySelector('p:nth-child(3)');
+        var title = titleInput.value;
+        var price = priceInput.value;
+        var description = descriptionInput.value;
 
-                if (nombreElement && precioElement && descripcionElement) {
-                    nombreElement.innerText = nombreEditado;
-                    precioElement.innerText = 'Precio: ' + precioEditado;
-                    descripcionElement.innerText = descripcionEditada;
+        // Guardar la información en el Local Storage (puedes adaptar esto según tus necesidades)
+        localStorage.setItem('editedItemTitle', title);
+        localStorage.setItem('editedItemPrice', price);
+        localStorage.setItem('editedItemDescription', description);
 
-                    // Cerrar el popup
-                    cerrarPopup();
-                } else {
-                    console.error('Elementos internos no encontrados en el elemento .item');
-                }
-            } else {
-                console.error('Elemento .item no encontrado');
-            }
-        }
+        // Cerrar el popup
+        cerrarPopup();
+    }
 
         // Función para agregar una nueva sección
         function agregarSeccion() {
