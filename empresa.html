@@ -162,24 +162,30 @@
     </div>
 
     <script>
-        // Función para mostrar el popup de edición
-        function mostrarPopup(icon) {
-            var item = icon.closest('.item');
-            var nombre = item.querySelector('h3').innerText;
-            var precio = item.querySelector('p:nth-child(2)').innerText.split(': ')[1];
-            var descripcion = item.querySelector('p:nth-child(3)').innerText;
+       // Función para mostrar el popup de edición
+    function mostrarPopup(icon) {
+        var item = icon.closest('.item');
+        
+        // Verificar si se encontró el elemento .item
+        if (item) {
+            var nombre = item.querySelector('h3');
+            var precio = item.querySelector('p:nth-child(2)');
+            var descripcion = item.querySelector('p:nth-child(3)');
 
-            document.getElementById('editNombre').value = nombre;
-            document.getElementById('editPrecio').value = precio;
-            document.getElementById('editDescripcion').value = descripcion;
+            // Verificar si se encontraron los elementos internos
+            if (nombre && precio && descripcion) {
+                document.getElementById('editNombre').value = nombre.innerText;
+                document.getElementById('editPrecio').value = precio.innerText.split(': ')[1];
+                document.getElementById('editDescripcion').value = descripcion.innerText;
 
-            document.getElementById('editPopup').style.display = 'flex';
+                document.getElementById('editPopup').style.display = 'flex';
+            } else {
+                console.error('Elementos internos no encontrados en el elemento .item');
+            }
+        } else {
+            console.error('Elemento .item no encontrado');
         }
-
-        // Función para cerrar el popup
-        function cerrarPopup() {
-            document.getElementById('editPopup').style.display = 'none';
-        }
+    }
 
         // Función para guardar los cambios
         function guardarCambios() {
