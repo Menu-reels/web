@@ -57,11 +57,6 @@
             overflow: hidden;
         }
 
-        .item:hover .capa-editar {
-            opacity: 1;
-            height: 100%;
-        }
-
         .capa-editar {
             position: absolute;
             top: 0;
@@ -133,7 +128,7 @@
 </header>
 
 <section class="reels">
-    <div class="item-container">
+    <div class="item-container" onmouseover="showEditar(this)" onmouseout="hideEditar(this)">
         <div class="capa-editar">
             <i class="fas fa-pencil-alt"></i> Editar
             <i class="fas fa-trash-alt"></i> Eliminar
@@ -152,7 +147,7 @@
     </div>
 
     <!-- Agrega más .item-container con información inventada -->
-    <div class="item-container">
+    <div class="item-container" onmouseover="showEditar(this)" onmouseout="hideEditar(this)">
         <div class="capa-editar">
             <i class="fas fa-pencil-alt"></i> Editar
             <i class="fas fa-trash-alt"></i> Eliminar
@@ -190,6 +185,16 @@
         <div>Vista Previa 2</div>
     </div>
 </section>
+
+<script>
+    function showEditar(container) {
+        container.querySelector('.capa-editar').style.opacity = 1;
+    }
+
+    function hideEditar(container) {
+        container.querySelector('.capa-editar').style.opacity = 0;
+    }
+</script>
 
 </body>
 </html>
