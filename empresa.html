@@ -109,6 +109,46 @@
         <!-- Agrega más items según sea necesario -->
 
     </div>
+  <!-- Botón "Añadir sección" -->
+    <button id="addSectionButton" onclick="agregarSeccion()">Añadir sección</button>
+<script>
+        // Función para agregar una nueva sección
+        function agregarSeccion() {
+            // Crear un nuevo nodo
+            var nuevoItem = document.createElement('div');
+            nuevoItem.className = 'item';
 
+            var nuevoImg = document.createElement('img');
+            nuevoImg.src = 'nueva_imagen.jpg';
+            nuevoImg.alt = 'Nuevo Plato';
+            nuevoItem.appendChild(nuevoImg);
+
+            var nuevaInfoItem = document.createElement('div');
+            nuevaInfoItem.className = 'info-item';
+
+            var editIcon = document.createElement('span');
+            editIcon.className = 'edit-icon';
+            editIcon.innerHTML = '<i class="fas fa-pencil-alt"></i>';
+            nuevaInfoItem.appendChild(editIcon);
+
+            var nuevoH3 = document.createElement('h3');
+            nuevoH3.innerHTML = 'Nuevo Plato';
+            nuevaInfoItem.appendChild(nuevoH3);
+
+            var nuevoPrecio = document.createElement('p');
+            nuevoPrecio.innerHTML = 'Precio: $0.00';
+            nuevaInfoItem.appendChild(nuevoPrecio);
+
+            var nuevaDescripcion = document.createElement('p');
+            nuevaDescripcion.innerHTML = 'Descripción del Nuevo Plato';
+            nuevaInfoItem.appendChild(nuevaDescripcion);
+
+            nuevoItem.appendChild(nuevaInfoItem);
+
+            // Agregar el nuevo nodo al contenedor de items
+            var contenedorItems = document.querySelector('.items');
+            contenedorItems.appendChild(nuevoItem);
+        }
+    </script>
 </body>
 </html>
