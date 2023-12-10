@@ -148,7 +148,6 @@
         </div>
     </div>
 
-    <!-- Agrega más .item-container con información inventada -->
     <div class="item-container" onmouseover="showEditar(this)" onmouseout="hideEditar(this)">
         <div class="capa-editar">
             <i class="fas fa-pencil-alt"></i> Editar
@@ -167,8 +166,25 @@
         </div>
     </div>
 
-    <!-- Repite el patrón para más elementos -->
+  <div class="item-container" onmouseover="showEditar(this)" onmouseout="hideEditar(this)">
+        <div class="capa-editar">
+            <i class="fas fa-pencil-alt"></i> Editar
+            <i class="fas fa-trash-alt"></i> Eliminar
+        </div>
+        <div class="item" data-index="3">
+           <video class="item-video" controls="">
+                <source src="video-ejemplo.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <div class="info-item">
+                <h3 class="item-title">Plato 3</h3>
+                <p class="item-price">Precio: 10.99€</p>
+                <p class="item-description">Descripción del Plato 2</p>
+            </div>
+        </div>
+    </div>
 
+   
 </section>
 
 <section class="editor">
@@ -195,6 +211,21 @@
 
     function hideEditar(container) {
         container.querySelector('.capa-editar').style.opacity = 0;
+    }
+
+  function editarItem(icon) {
+        // Obtener el contenedor del elemento
+        const container = icon.closest('.item-container');
+        
+        // Obtener valores del elemento
+        const title = container.querySelector('.item-title').textContent;
+        const price = container.querySelector('.item-price').textContent;
+        const description = container.querySelector('.item-description').textContent;
+
+        // Asignar valores a la sección de edición
+        document.querySelector('.edicion-h1').value = title;
+        document.querySelector('.edicion-precio').value = price;
+        document.querySelector('.edicion-descripcion').value = description;
     }
 </script>
 
