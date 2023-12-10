@@ -189,13 +189,14 @@
 
 <section class="editor">
     <div>
+        <p class="value-data"></p>
         <p>Nombre Principal</p>
         <input type="text" class="edicion-h1">
         <p>Precio</p>
         <input type="text" class="edicion-precio">
         <p>Descripción</p>
         <textarea class="edicion-descripcion"></textarea>
-        <button>Guardar</button>
+        <button onclick="guardarCambios()">Guardar</button>
     </div>
 
     <div class="vistaprevia">
@@ -214,18 +215,34 @@
     }
 
   function editarItem(icon) {
-        // Obtener el contenedor del elemento
         const container = icon.closest('.item-container');
         
         // Obtener valores del elemento
         const title = container.querySelector('.item-title').textContent;
         const price = container.querySelector('.item-price').textContent;
         const description = container.querySelector('.item-description').textContent;
+        const index = container.getAttribute('data-index');
 
         // Asignar valores a la sección de edición
+        document.querySelector('.value-data').textContent = `Index: ${index}`;
         document.querySelector('.edicion-h1').value = title;
         document.querySelector('.edicion-precio').value = price;
         document.querySelector('.edicion-descripcion').value = description;
+    }
+
+function guardarCambios() {
+        // Obtener el índice del elemento actualmente editado
+        const index = document.querySelector('.value-data').textContent.split(': ')[1];
+
+        // Encontrar el elemento correspondiente por el índice
+        const itemContainer = document.querySelector(`.item-container[data-index="${index}"]`);
+
+        // Actualizar los valores del elemento
+        if (itemContainer) {
+            itemContainer.querySelector('.item-title').textContent = document.querySelector('.edicion-h1').value;
+            itemContainer.querySelector('.item-price').textContent = document.querySelector('.edicion-precio').value;
+            itemContainer.querySelector('.item-description').textContent = document.querySelector('.edicion-descripcion').value;
+        }
     }
 </script>
 
