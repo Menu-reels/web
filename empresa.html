@@ -17,6 +17,7 @@
             background-color: #f0f0f0;
             font-family: 'Raleway';
             margin: 0;
+            overflow: hidden;
             position: relative;
             color: white;
             transition: background 0.5s ease;
@@ -132,7 +133,7 @@
         <div class="item" data-index="1">
             <img src="imagen1.jpg" alt="Plato 1">
             <div class="info-item">
-                <span class="edit-icon" onclick="mostrarPopup(1)"><i class="fas fa-pencil-alt"></i></span>
+                <span class="edit-icon" onclick="mostrarPopup(this)"><i class="fas fa-pencil-alt"></i></span>
                 <h3>Nombre del Plato 1</h3>
                 <p>Precio: $10.99</p>
                 <p>Descripción del Plato 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -162,8 +163,8 @@
 
     <script>
         // Función para mostrar el popup de edición
-        function mostrarPopup(index) {
-            var item = document.querySelectorAll('.item')[index - 1];
+        function mostrarPopup(icon) {
+            var item = icon.closest('.item');
             var nombre = item.querySelector('h3').innerText;
             var precio = item.querySelector('p:nth-child(2)').innerText.split(': ')[1];
             var descripcion = item.querySelector('p:nth-child(3)').innerText;
@@ -200,8 +201,8 @@
         function agregarSeccion() {
             // Crear un nuevo nodo
             var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'item';
             var index = document.querySelectorAll('.item').length + 1;
+            nuevoItem.className = 'item';
             nuevoItem.setAttribute('data-index', index);
 
             var nuevoImg = document.createElement('img');
@@ -216,7 +217,7 @@
             editIcon.className = 'edit-icon';
             editIcon.innerHTML = '<i class="fas fa-pencil-alt"></i>';
             editIcon.onclick = function () {
-                mostrarPopup(index);
+                mostrarPopup(editIcon);
             };
             nuevaInfoItem.appendChild(editIcon);
 
