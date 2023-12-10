@@ -45,6 +45,7 @@
         }
 
         .item-container {
+            position: relative;
             width: 50%;
             flex-shrink: 0;  /* Evitar que los elementos se reduzcan en tamaño */
         }
@@ -54,6 +55,34 @@
             margin: 10px;
             padding: 10px;
             position: relative;
+            overflow: hidden;
+        }
+
+        .item:hover .capa-editar {
+            opacity: 1;
+            height: 100%;
+        }
+
+        .capa-editar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease, height 0.3s ease;
+        }
+
+        .capa-editar i {
+            font-size: 24px;
+            margin: 5px;
+            cursor: pointer;
         }
 
         .item-image {
@@ -106,6 +135,10 @@
 
 <section class="reels">
     <div class="item-container">
+        <div class="capa-editar">
+            <i class="fas fa-pencil-alt"></i> Editar
+            <i class="fas fa-trash-alt"></i> Eliminar
+        </div>
         <div class="item" data-index="1">
             <video class="item-video" controls>
                 <source src="video-ejemplo.mp4" type="video/mp4">
@@ -118,45 +151,27 @@
             </div>
         </div>
     </div>
-<div class="item-container">
+
+    <!-- Agrega más .item-container con información inventada -->
+    <div class="item-container">
+        <div class="capa-editar">
+            <i class="fas fa-pencil-alt"></i> Editar
+            <i class="fas fa-trash-alt"></i> Eliminar
+        </div>
         <div class="item" data-index="2">
-            <video class="item-video" controls>
+           <video class="item-video" controls="">
                 <source src="video-ejemplo.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
             <div class="info-item">
-                <h3 class="item-title">Nuevo Plato</h3>
-                <p class="item-price">Precio: $0.00</p>
-                <p class="item-description">Descripción del Nuevo Plato</p>
+                <h3 class="item-title">Plato 2</h3>
+                <p class="item-price">Precio: $10.99</p>
+                <p class="item-description">Descripción del Plato 2</p>
             </div>
         </div>
     </div>
-<div class="item-container">
-        <div class="item" data-index="3">
-            <video class="item-video" controls>
-                <source src="video-ejemplo.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-            <div class="info-item">
-                <h3 class="item-title">Nuevo Plato</h3>
-                <p class="item-price">Precio: $0.00</p>
-                <p class="item-description">Descripción del Nuevo Plato</p>
-            </div>
-        </div>
-    </div>
-<div class="item-container">
-        <div class="item" data-index="4">
-            <video class="item-video" controls>
-                <source src="video-ejemplo.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-            <div class="info-item">
-                <h3 class="item-title">Nuevo Plato</h3>
-                <p class="item-price">Precio: $0.00</p>
-                <p class="item-description">Descripción del Nuevo Plato</p>
-            </div>
-        </div>
-    </div>
+
+    <!-- Repite el patrón para más elementos -->
 
 </section>
 
